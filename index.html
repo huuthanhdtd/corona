@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>Cập nhật tình trạng virut Corona nCoV, Corona nCoV Live update</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
+    <link rel="shortcut icon" href="../favicon.png">
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script type='text/javascript' src='js/sheetsee.js'></script>
+    <link rel='stylesheet' type='text/css' href='assets/style.css'>
+  </head>
+  <style>
+    #Pagination {border-top: 4px solid #CCF4FF; margin: 10px 0px; padding-top: 10px; display: inline-block;}
+    #Pagination a {cursor: pointer;}
+    .no-pag {color: #acacac; border: none;}
+    .no-pag:hover {color: #acacac;}
+    input {border: none; border-bottom: 1px solid #333;margin: 10px 0px; width: 200px; font-size: 16px; padding-bottom: 6px;}
+    .tHeader {padding: 8px; cursor: pointer; text-align: left;}
+  </style>
+  <body>
+    <div class="container">
+      <h1>Cập nhật tình trạng virut Corona nCoV</h1>
+      <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00</span></em><p>
+	  
+	<div id="chart_div"></div>
+  
+      <input id="fullTableFilter" type="text" placeholder="lọc.."></input>
+      <a class="clear">Xóa</a>
+      <div id="fullTable">Đang tải...</div>
+      
+      <footer>
+        <h4 id="getting-started">Kiến thức</h4>
+        <ul>
+          <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus corona 2019 là gì?</a></li>
+          <li><a href="#">Nguồn gốc của 2019-nCoV</a></li>
+          <li><a href="#">Cơ chế lây lan</a></li>
+        </ul>
+        <h4 id="ideas">Cách phòng ngừa</h4>
+        <ul>
+          <li><a href="#">Rửa tay thường xuyên</a></li>
+          <li><a href="#">Đeo khẩu trang</a></li>
+		  <li><a href="#">Tránh nơi đông người</a></li>
+        </ul>
+        <h4 id="use">Triệu chứng</h4>
+        <ul>
+          <li><a href="#">Sốt</a></li>
+          <li><a href="#">Ho</a></li>
+          <li><a href="#">Khó thở</a></li>
+        </ul>
+        <h4 id="use">Đường dây nóng</h4>
+        <ul>
+          <li><a href="tel:19009095">1900-9095</a></li>
+          <li><a href="tel:19003228">1900-3228</a></li>
+        </ul>
+      </footer>
+	  <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
+    </div>
+
+    <script id="fullTable_template" type="text/html">
+      <table>
+        <tr><th class="tHeader">Ngày</th><th class="tHeader">Nghi Nhiễm</th><th class="tHeader">Tử vong</th><th class="tHeader">Khỏi bệnh</th><th class="tHeader">Tăng nhiễm</th></tr>
+          {{#rows}}
+            <tr><td>{{Ngày}}</td><td>{{Nghi Nhiễm}}</td><td>{{Tử vong}}</td><td>{{Khỏi bệnh}}</td><td>{{Tăng nhiễm}}</td></tr>
+          {{/rows}}
+      </table>
+    </script>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function() {
+        var URL = "1apbJy54knVUXcKpuerSrgkADdZaGJ05Xh3pqkhHZZsI"
+        Tabletop.init({key: URL, callback: showInfo, simpleSheet: true})
+      })
+	  google.charts.load('current', {packages: ['corechart', 'line']});
+		
+		var dt;
+      function showInfo (data) {
+        var tableOptions = {
+          "data": data,
+          "pagination": 50,
+          "tableDiv": "#fullTable",
+          "filterDiv": "#fullTableFilter"
+        }
+		dt = data;
+		document.getElementById('updatetime').innerText = dt[0]['Cập nhật']
+        Sheetsee.makeTable(tableOptions)
+        Sheetsee.initiateTableFilter(tableOptions)
+		google.charts.setOnLoadCallback(drawAxisTickColors);
+      }
+
+      
+
+function drawAxisTickColors() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Ngày');
+      data.addColumn('number', 'Nhiễm');
+	  data.addColumn({type: 'number', role: 'annotation'});
+      data.addColumn('number', 'Chết');
+	  data.addColumn({type: 'number', role: 'annotation'});
+	  data.addColumn('number', 'Khỏi');
+	  //data.addColumn({type: 'number', role: 'annotation'});
+		for (i = 0;i<dt.length;i++){
+		var nn = parseInt(dt[i]['Nghi Nhiễm'])
+		var tv = parseInt(dt[i]['Tử vong'])
+		var kb = parseInt(dt[i]['Khỏi bệnh'])
+		data.addRows([[dt[i]['Ngày'],nn, nn, tv, tv, kb]]);
+		}
+      
+
+      var options = {
+        hAxis: {
+          title: null,
+          textStyle: {
+            color: '#01579b',
+            fontSize: 12,
+            fontName: 'Arial',
+            bold: false,
+            italic: false
+          },
+          titleTextStyle: {
+            color: '#01579b',
+            fontSize: 12,
+            fontName: 'Arial',
+            bold: false,
+            italic: true
+          },
+		  slantedTextAngle:90
+        },
+        vAxis: {
+          title: 'Người',
+          textStyle: {
+            color: '#1a237e',
+            fontSize: 12,
+            bold: false
+          },
+          titleTextStyle: {
+            color: '#1a237e',
+            fontSize: 12,
+            bold: false,
+            italic: false
+          },
+          format: 'short'
+        },
+		height:600,
+		annotations: {
+            0: {style: 'point'}
+			},
+		chartArea:{left:50,top:10,width:'90%',height:'75%'},
+        colors: ['#4285f4', '#ea4335', '38761d'],
+        legend: { position: 'bottom' },
+        series: {
+            0: { pointSize: 6, pointShape: 'square', },
+            1: { pointSize: 4, pointShape: 'circle' },
+			2: { pointSize: 4, pointShape: 'circle' }
+          },
+        
+      };
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+    </script>
+  </body>
+</html>
