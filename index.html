@@ -40,16 +40,15 @@
   </script>
 
 </head>
-
 <body>
   <div class="container">
-    <h1>Virut Corona nCoV 2019</h1>
+    <h1><a href="/">Virut Corona nCoV 2019</a></h1>
     <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00</span>, tự động cập nhật sau 5 phút.</em></p>
 
     <div id="chart_div"></div>
 
     <div id="fullTable" class="row">
-      <h5>Thế giới</h5>
+      <h5>Hiện tại</h5>
       <table id="world" class="u-full-width"></table>
     </div>
     
@@ -61,14 +60,11 @@
           <div class="three columns">
             <h5>Kiến thức</h5>
             <ul>
-              <li><a
-                  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus
+              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/" target="_blank">Virus
                   corona 2019 là gì?</a></li>
-              <li><a
-                  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn
+              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/" target="_blank">Nguồn
                   gốc của 2019-nCoV</a></li>
-              <li><a
-                  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Cơ
+              <li><a  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/" target="_blank">Cơ
                   chế lây lan</a></li>
             </ul>
           </div>
@@ -99,10 +95,10 @@
           </div>
         </div>
       </div>
-
     </footer>
 
   </div>
+
   <div style="text-align: center;">
     <p>Phát triển bởi Cualuoidanang.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
   </div>
@@ -228,11 +224,10 @@
       for(var i = 0; i < 10; i++){
         var entry = feed.entries[i];
         var day = entry.date.substring(0,10);
-        textarea.innerHTML += `<li><a href="${entry.link}">${entry.title}</a> <code>${day}</code></li>`
+        textarea.innerHTML += `<li><a href="${entry.link}" target="_blank">${entry.title}</a> <code>${day}</code></li>`
       }
     })
   </script>
   
 </body>
-
 </html>
