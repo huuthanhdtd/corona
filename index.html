@@ -26,7 +26,6 @@
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
     <link rel="shortcut icon" href="favicon.png">
     <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-    <script type='text/javascript' src='sheetsee.js'></script>
     <link rel='stylesheet' type='text/css' href='style.css'>
   </head>
   <body>
@@ -76,13 +75,15 @@
             </div>
           </div>
         </div>
-        <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
+        
       </footer>
 	  
     </div>
-    
+    <div style="text-align: center;background: url(bg.jpeg) no-repeat top center; height: 200px;display: block;">
+      <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
+    </div>
 
-    </table>
+    
     <script id="fullTable_template" type="text/html">
       <table class="u-full-width">
         <tr><th class="tHeader">Ngày</th><th class="tHeader">Nhiễm</th><th class="tHeader">Tử vong</th><th class="tHeader">Khỏi bệnh</th><th class="tHeader">Tăng nhiễm</th></tr>
@@ -110,8 +111,6 @@
         }
 		dt = data;
 		document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
-        //Sheetsee.makeTable(tableOptions)
-        //Sheetsee.initiateTableFilter(tableOptions)
         drawTable();
 
 		google.charts.setOnLoadCallback(drawAxisTickColors);
