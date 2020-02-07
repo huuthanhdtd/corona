@@ -1,92 +1,112 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset='utf-8'>
-    <title>Cập nhật tình trạng virut Corona 2019 nCoV, Live update</title>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'/>
 
-    <meta name="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
-    <meta property="og:description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
-    <meta itemprop="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update">
-    
-    <meta name="author" content="Cualuoidanang.com" />
-    <meta name="theme-color" content="#2f9697">
-    <meta name="mobile-web-app-capable" content="yes">
-    
-    <meta itemprop="name" content="ncov.ga">
-    <meta itemprop="image" content="https://ncov.ga/bg.jpeg">
+<head>
+  <meta charset='utf-8'>
+  <title>Cập nhật tình trạng virut Corona 2019 nCoV, Live update</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
-    <meta property="og:url" content="https://ncov.ga" />
-    <meta property="og:title" content="ncov.ga" />
-    <meta property="og:image" content="https://ncov.ga/bg.jpeg" />
+  <meta name="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
+  <meta property="og:description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
+  <meta itemprop="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update">
 
-    <meta name="twitter:title" content="ncov.ga" />
-    <meta name="twitter:image" content="https://ncov.ga/bg.jpeg" />
+  <meta name="author" content="Cualuoidanang.com" />
+  <meta name="theme-color" content="#2f9697">
+  <meta name="mobile-web-app-capable" content="yes">
 
-    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400' rel='stylesheet' type='text/css'>
-    <link rel="shortcut icon" href="favicon.png">
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
-    <link rel='stylesheet' type='text/css' href='style.css'>
-  </head>
-  <body>
-    <div class="container">
-      <h1>Virut Corona nCoV 2019</h1>
-      <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00:00</span>, tự động cập nhật sau 5 phút.</em><p>
-	  
-	<div id="chart_div"></div>
-  
-      <div id="fullTable" class="row">
-        <h5>Thế giới</h5>
-        <table id="world" class="u-full-width"></table>
-      </div>
-      <hr>
-      <footer>
-        <div class="footer">
-          <div class="row">
-            <div class="three columns">
-              <h5>Kiến thức</h5>
-            <ul>
-              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus corona 2019 là gì?</a></li>
-              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn gốc của 2019-nCoV</a></li>
-              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Cơ chế lây lan</a></li>
-            </ul>
-            </div>
-            <div class="three columns">
-              <h5>Phòng ngừa</h5>
-              <ul>
-                <li>Rửa tay thường xuyên</li>
-                <li>Đeo khẩu trang</li>
-                <li>Tránh nơi đông người</li>
-                <li>Tránh tiếp xúc vật nuôi</li>
-              </ul>
-            </div>
-            <div class="three columns">
-              <h5>Triệu chứng</h5>
-              <ul>
-                <li>Sốt</li>
-                <li>Ho</li>
-                <li>Khó thở</li>
-              </ul>
-            </div>
-            <div class="three columns">
-              <h5>Đường dây nóng</h5>
-              <ul>
-                <li><a href="tel:19009095">1900-9095</a></li>
-                <li><a href="tel:19003228">1900-3228</a></li>
-              </ul>
+  <meta itemprop="name" content="ncov.ga">
+  <meta itemprop="image" content="https://ncov.ga/bg.jpeg">
+
+  <meta property="og:url" content="https://ncov.ga" />
+  <meta property="og:title" content="ncov.ga" />
+  <meta property="og:image" content="https://ncov.ga/bg.jpeg" />
+
+  <meta name="twitter:title" content="ncov.ga" />
+  <meta name="twitter:image" content="https://ncov.ga/bg.jpeg" />
+
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400'
+    rel='stylesheet' type='text/css'>
+  <link rel="shortcut icon" href="favicon.png">
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+  <link rel='stylesheet' type='text/css' href='style.css'>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-12788638-4');
+  </script>
+
+</head>
+
+<body>
+  <div class="container">
+    <h1>Virut Corona nCoV 2019</h1>
+    <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00:00</span>, tự động cập nhật sau 5 phút.</em>
+      <p>
+
+        <div id="chart_div"></div>
+
+        <div id="fullTable" class="row">
+          <h5>Thế giới</h5>
+          <table id="world" class="u-full-width"></table>
+        </div>
+        <hr>
+        <footer>
+          <div class="footer">
+            <div class="row">
+              <div class="three columns">
+                <h5>Kiến thức</h5>
+                <ul>
+                  <li><a
+                      href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus
+                      corona 2019 là gì?</a></li>
+                  <li><a
+                      href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn
+                      gốc của 2019-nCoV</a></li>
+                  <li><a
+                      href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Cơ
+                      chế lây lan</a></li>
+                </ul>
+              </div>
+              <div class="three columns">
+                <h5>Phòng ngừa</h5>
+                <ul>
+                  <li>Rửa tay thường xuyên</li>
+                  <li>Đeo khẩu trang</li>
+                  <li>Tránh nơi đông người</li>
+                  <li>Tránh tiếp xúc vật nuôi</li>
+                </ul>
+              </div>
+              <div class="three columns">
+                <h5>Triệu chứng</h5>
+                <ul>
+                  <li>Sốt</li>
+                  <li>Ho</li>
+                  <li>Khó thở</li>
+                </ul>
+              </div>
+              <div class="three columns">
+                <h5>Đường dây nóng</h5>
+                <ul>
+                  <li><a href="tel:19009095">1900-9095</a></li>
+                  <li><a href="tel:19003228">1900-3228</a></li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-        
-      </footer>
-	  
-    </div>
-    <div style="text-align: center;">
-      <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
-    </div>
 
-    
-    <script id="fullTable_template" type="text/html">
+        </footer>
+
+  </div>
+  <div style="text-align: center;">
+    <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
+  </div>
+
+
+  <script id="fullTable_template" type="text/html">
       <table class="u-full-width">
         <tr><th class="tHeader">Ngày</th><th class="tHeader">Nhiễm</th><th class="tHeader">Tử vong</th><th class="tHeader">Khỏi bệnh</th><th class="tHeader">Tăng nhiễm</th></tr>
           {{#rows}}
@@ -95,48 +115,48 @@
       </table>
     </script>
 
-	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      document.addEventListener('DOMContentLoaded', function() {
-        var URL = "1apbJy54knVUXcKpuerSrgkADdZaGJ05Xh3pqkhHZZsI"
-        Tabletop.init({key: URL, callback: showInfo, simpleSheet: true})
-      })
-	  google.charts.load('current', {packages: ['corechart', 'line']});
-		
-		var dt;
-      function showInfo (data) {
-        var tableOptions = {
-          "data": data,
-          "pagination": 50,
-          "tableDiv": "#fullTable",
-          "filterDiv": "#fullTableFilter"
-        }
-		dt = data;
-		document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
-        drawTable();
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', function () {
+      var URL = "1apbJy54knVUXcKpuerSrgkADdZaGJ05Xh3pqkhHZZsI"
+      Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
+    })
+    google.charts.load('current', { packages: ['corechart', 'line'] });
 
-		google.charts.setOnLoadCallback(drawAxisTickColors);
+    var dt;
+    function showInfo(data) {
+      var tableOptions = {
+        "data": data,
+        "pagination": 50,
+        "tableDiv": "#fullTable",
+        "filterDiv": "#fullTableFilter"
       }
+      dt = data;
+      document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
+      drawTable();
 
-      
+      google.charts.setOnLoadCallback(drawAxisTickColors);
+    }
 
-function drawAxisTickColors() {
+
+
+    function drawAxisTickColors() {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Ngày');
       data.addColumn('number', 'Nhiễm');
-	  data.addColumn({type: 'number', role: 'annotation'});
+      data.addColumn({ type: 'number', role: 'annotation' });
       data.addColumn('number', 'Chết');
-	  data.addColumn({type: 'number', role: 'annotation'});
-    data.addColumn('number', 'Khỏi');
-    data.addColumn('number', 'Tăng nhiễm');
-	  //data.addColumn({type: 'number', role: 'annotation'});
-		for (i = 0;i<dt.length;i++){
-		var nn = parseInt(dt[i]['Nghi Nhiễm'])
-		var tv = parseInt(dt[i]['Tử vong'])
-		var kb = parseInt(dt[i]['Khỏi bệnh'])
-		data.addRows([[dt[i]['Ngày'],nn, nn, tv, tv, kb, parseInt(dt[i]['Tăng nhiễm'])]]);
-		}
-      
+      data.addColumn({ type: 'number', role: 'annotation' });
+      data.addColumn('number', 'Khỏi');
+      data.addColumn('number', 'Tăng nhiễm');
+      //data.addColumn({type: 'number', role: 'annotation'});
+      for (i = 0; i < dt.length; i++) {
+        var nn = parseInt(dt[i]['Nghi Nhiễm'])
+        var tv = parseInt(dt[i]['Tử vong'])
+        var kb = parseInt(dt[i]['Khỏi bệnh'])
+        data.addRows([[dt[i]['Ngày'], nn, nn, tv, tv, kb, parseInt(dt[i]['Tăng nhiễm'])]]);
+      }
+
 
       var options = {
         hAxis: {
@@ -155,7 +175,7 @@ function drawAxisTickColors() {
             bold: false,
             italic: true
           },
-		  slantedTextAngle:90
+          slantedTextAngle: 90
         },
         vAxis: {
           title: 'Người',
@@ -172,51 +192,52 @@ function drawAxisTickColors() {
           },
           format: 'short'
         },
-		height:600,
-		annotations: {
-            0: {style: 'point'}
-			},
-		chartArea:{left:50,top:10,width:'90%',height:'75%'},
+        height: 600,
+        annotations: {
+          0: { style: 'point' }
+        },
+        chartArea: { left: 50, top: 10, width: '90%', height: '75%' },
         colors: ['#4285f4', '#ea4335', '#38761d', '#4374e0'],
         legend: { position: 'bottom' },
         series: {
-            0: { pointSize: 6, pointShape: 'square', },
-            1: { pointSize: 6, pointShape: 'diamond' },
-            2: { pointSize: 4, pointShape: 'circle' },
-            3: { lineDashStyle: [1, 1] }
-          },
-        
+          0: { pointSize: 6, pointShape: 'square', },
+          1: { pointSize: 6, pointShape: 'diamond' },
+          2: { pointSize: 4, pointShape: 'circle' },
+          3: { lineDashStyle: [1, 1] }
+        },
+
       };
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
 
     function drawTable() {
-        var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
-        //var column_names_vn = ['Ngày', 'Nhiễm', 'Chết', 'Khỏi', 'Tăng'];
-        var html = '';
-        //var html_vn = '';
-        
-        html += "<thead><tr>";
-        //html_vn += "<thead><tr>";
-        for(var i = 0; i < column_names.length; i++) {
-          html += '<th>' + column_names[i] +'</th>';
-          //html_vn += '<th >' + column_names_vn[i] +'</th>';
-        }
-        html += "</tr></thead>";
-        //html_vn += "</tr></thead>";
-        
-        html += '<tbody>';
-        //html_vn += '<tbody>';
-        for(var i = dt.length-1; i >= 0; i--) {
-          html += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nghi Nhiễm'] +' (' + dt[i]['Nhiễm'] +')</td><td>' + dt[i]['Tử vong'] +' (' + dt[i]['Chết'] +')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] +'</td>' + '</tr>';
-          //html_vn += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nhiễm'] +'</td><td>' + dt[i]['Chết'] +'</td><td>' + dt[i]['Khỏi'] +'</td><td>' + dt[i]['Tăng'] +'</td>' + '</tr>';
-        }
-        html += '</tbody>';
-        //html_vn += '</tbody>';
-        document.getElementById('world').innerHTML = html;
-        //document.getElementById('vietnam').innerHTML = html_vn;
+      var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
+      //var column_names_vn = ['Ngày', 'Nhiễm', 'Chết', 'Khỏi', 'Tăng'];
+      var html = '';
+      //var html_vn = '';
+
+      html += "<thead><tr>";
+      //html_vn += "<thead><tr>";
+      for (var i = 0; i < column_names.length; i++) {
+        html += '<th>' + column_names[i] + '</th>';
+        //html_vn += '<th >' + column_names_vn[i] +'</th>';
       }
-    </script>
-  </body>
+      html += "</tr></thead>";
+      //html_vn += "</tr></thead>";
+
+      html += '<tbody>';
+      //html_vn += '<tbody>';
+      for (var i = dt.length - 1; i >= 0; i--) {
+        html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
+        //html_vn += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nhiễm'] +'</td><td>' + dt[i]['Chết'] +'</td><td>' + dt[i]['Khỏi'] +'</td><td>' + dt[i]['Tăng'] +'</td>' + '</tr>';
+      }
+      html += '</tbody>';
+      //html_vn += '</tbody>';
+      document.getElementById('world').innerHTML = html;
+      //document.getElementById('vietnam').innerHTML = html_vn;
+    }
+  </script>
+</body>
+
 </html>
