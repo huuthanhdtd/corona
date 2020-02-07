@@ -107,22 +107,7 @@
     <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
   </div>
 
-  <script src="feednami.js"></script>
-  <script type="text/javascript">
-  const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
-  const textarea = document.getElementById('feed')
-  feednami.load(url)
-    .then(feed => {
-      textarea.innerHTML = ''
-      console.log(feed)
-      for(var i = 0; i < 10; i++){
-        var entry = feed.entries[i];
-        var day = entry.date.substring(0,10);
-        textarea.innerHTML += `<li><a href="${entry.link}">${entry.title}</a> <code>${day}</code></li>`
-        // the first 120 characters of the entry
-      }
-    })
-  </script>
+  
 
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -236,6 +221,22 @@
     setInterval(getData, 60000);
   </script>
 
+  <script src="feednami.js"></script>
+  <script type="text/javascript">
+  const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
+  const textarea = document.getElementById('feed')
+  feednami.load(url)
+    .then(feed => {
+      textarea.innerHTML = ''
+      console.log(feed)
+      for(var i = 0; i < 10; i++){
+        var entry = feed.entries[i];
+        var day = entry.date.substring(0,10);
+        textarea.innerHTML += `<li><a href="${entry.link}">${entry.title}</a> <code>${day}</code></li>`
+        // the first 120 characters of the entry
+      }
+    })
+  </script>
   
 </body>
 
