@@ -381,16 +381,20 @@ hr {
   border-width: 0;
   border-top: 1px solid #E1E1E1; }
 
-  #vn-stats {
-    overflow:hidden;
-  
-  }
-  #vn-stats .column{
-      display:block;
-      text-align:center;
-      background-color:#cccccc;
-      margin-bottom:5px;
-    }
+#vn-stats {
+  overflow:hidden;
+}
+#vn-stats .column{
+  display:block;
+  text-align:center;
+  background-color:#cccccc;
+  margin-bottom:5px;
+  padding-top:10px;
+}
+#vn-stats .column:last-child{
+  background-color:#999999!important;
+  color:white;
+}
   
 
 /* Clearing
