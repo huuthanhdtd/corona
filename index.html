@@ -30,35 +30,51 @@
       <div id="fullTable">Đang tải...</div>
       
       <footer>
-        <h4 id="getting-started">Kiến thức</h4>
-        <ul>
-          <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus corona 2019 là gì?</a></li>
-          <li><a href="#">Nguồn gốc của 2019-nCoV</a></li>
-          <li><a href="#">Cơ chế lây lan</a></li>
-        </ul>
-        <h4 id="ideas">Cách phòng ngừa</h4>
-        <ul>
-          <li><a href="#">Rửa tay thường xuyên</a></li>
-          <li><a href="#">Đeo khẩu trang</a></li>
-		  <li><a href="#">Tránh nơi đông người</a></li>
-        </ul>
-        <h4 id="use">Triệu chứng</h4>
-        <ul>
-          <li><a href="#">Sốt</a></li>
-          <li><a href="#">Ho</a></li>
-          <li><a href="#">Khó thở</a></li>
-        </ul>
-        <h4 id="use">Đường dây nóng</h4>
-        <ul>
-          <li><a href="tel:19009095">1900-9095</a></li>
-          <li><a href="tel:19003228">1900-3228</a></li>
-        </ul>
+        <div class="footer">
+          <div class="row">
+            <div class="three columns">
+              <h5>Kiến thức</h4>
+            <ul>
+              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus corona 2019 là gì?</a></li>
+              <li><a href="#">Nguồn gốc của 2019-nCoV</a></li>
+              <li><a href="#">Cơ chế lây lan</a></li>
+            </ul>
+            </div>
+            <div class="three columns">
+              <h5>Phòng ngừa</h4>
+              <ul>
+                <li><a href="#">Rửa tay thường xuyên</a></li>
+                <li><a href="#">Đeo khẩu trang</a></li>
+                <li><a href="#">Tránh nơi đông người</a></li>
+              </ul>
+            </div>
+            <div class="three columns">
+              <h5>Triệu chứng</h4>
+              <ul>
+                <li><a href="#">Sốt</a></li>
+                <li><a href="#">Ho</a></li>
+                <li><a href="#">Khó thở</a></li>
+              </ul>
+            </div>
+            <div class="three columns">
+              <h5>Đường dây nóng</h4>
+              <ul>
+                <li><a href="tel:19009095">1900-9095</a></li>
+                <li><a href="tel:19003228">1900-3228</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        
+        
+        
       </footer>
 	  <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
     </div>
 
     <script id="fullTable_template" type="text/html">
-      <table>
+      <table class="u-full-width">
         <tr><th class="tHeader">Ngày</th><th class="tHeader">Nghi Nhiễm</th><th class="tHeader">Tử vong</th><th class="tHeader">Khỏi bệnh</th><th class="tHeader">Tăng nhiễm</th></tr>
           {{#rows}}
             <tr><td>{{Ngày}}</td><td>{{Nghi Nhiễm}}</td><td>{{Tử vong}}</td><td>{{Khỏi bệnh}}</td><td>{{Tăng nhiễm}}</td></tr>
