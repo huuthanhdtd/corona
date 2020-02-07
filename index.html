@@ -35,14 +35,16 @@
 	  
 	<div id="chart_div"></div>
   
-      <div id="fullTable"><table id="pretty" class="u-full-width"></table></div>
-      
+      <div id="fullTable" class="row">
+        <h5>Thế giới</h5>
+        <table id="world" class="u-full-width"></table>
+      </div>
       <hr>
       <footer>
         <div class="footer">
           <div class="row">
             <div class="three columns">
-              <h5>Kiến thức</h4>
+              <h5>Kiến thức</h5>
             <ul>
               <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus corona 2019 là gì?</a></li>
               <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn gốc của 2019-nCoV</a></li>
@@ -50,7 +52,7 @@
             </ul>
             </div>
             <div class="three columns">
-              <h5>Phòng ngừa</h4>
+              <h5>Phòng ngừa</h5>
               <ul>
                 <li>Rửa tay thường xuyên</li>
                 <li>Đeo khẩu trang</li>
@@ -59,7 +61,7 @@
               </ul>
             </div>
             <div class="three columns">
-              <h5>Triệu chứng</h4>
+              <h5>Triệu chứng</h5>
               <ul>
                 <li>Sốt</li>
                 <li>Ho</li>
@@ -67,7 +69,7 @@
               </ul>
             </div>
             <div class="three columns">
-              <h5>Đường dây nóng</h4>
+              <h5>Đường dây nóng</h5>
               <ul>
                 <li><a href="tel:19009095">1900-9095</a></li>
                 <li><a href="tel:19003228">1900-3228</a></li>
@@ -190,23 +192,30 @@ function drawAxisTickColors() {
     }
 
     function drawTable() {
-        var column_names = ['Ngày', 'Nghi Nhiễm', 'Tử vong', 'Khỏi bệnh', 'Tăng nhiễm'];
-        
+        var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
+        //var column_names_vn = ['Ngày', 'Nhiễm', 'Chết', 'Khỏi', 'Tăng'];
         var html = '';
-        
+        //var html_vn = '';
         
         html += "<thead><tr>";
+        //html_vn += "<thead><tr>";
         for(var i = 0; i < column_names.length; i++) {
           html += '<th>' + column_names[i] +'</th>';
+          //html_vn += '<th >' + column_names_vn[i] +'</th>';
         }
         html += "</tr></thead>";
+        //html_vn += "</tr></thead>";
         
         html += '<tbody>';
+        //html_vn += '<tbody>';
         for(var i = dt.length-1; i >= 0; i--) {
-          html += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nghi Nhiễm'] +'</td><td>' + dt[i]['Tử vong'] +'</td><td>' + dt[i]['Khỏi bệnh'] +'</td><td>' + dt[i]['Tăng nhiễm'] +'</td>' + '</tr>';
+          html += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nghi Nhiễm'] +' (' + dt[i]['Nhiễm'] +')</td><td>' + dt[i]['Tử vong'] +' (' + dt[i]['Chết'] +')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] +'</td>' + '</tr>';
+          //html_vn += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nhiễm'] +'</td><td>' + dt[i]['Chết'] +'</td><td>' + dt[i]['Khỏi'] +'</td><td>' + dt[i]['Tăng'] +'</td>' + '</tr>';
         }
         html += '</tbody>';
-        document.getElementById('pretty').innerHTML = html;
+        //html_vn += '</tbody>';
+        document.getElementById('world').innerHTML = html;
+        //document.getElementById('vietnam').innerHTML = html_vn;
       }
     </script>
   </body>
