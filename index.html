@@ -36,7 +36,7 @@
 	  
 	<div id="chart_div"></div>
   
-      <div id="fullTable">Đang tải...</div>
+      <div id="fullTable"><table id="pretty" class="u-full-width"></table></div>
       
       <hr>
       <footer>
@@ -46,24 +46,25 @@
               <h5>Kiến thức</h4>
             <ul>
               <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus corona 2019 là gì?</a></li>
-              <li><a href="#">Nguồn gốc của 2019-nCoV</a></li>
-              <li><a href="#">Cơ chế lây lan</a></li>
+              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn gốc của 2019-nCoV</a></li>
+              <li><a href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Cơ chế lây lan</a></li>
             </ul>
             </div>
             <div class="three columns">
               <h5>Phòng ngừa</h4>
               <ul>
-                <li><a href="#">Rửa tay thường xuyên</a></li>
-                <li><a href="#">Đeo khẩu trang</a></li>
-                <li><a href="#">Tránh nơi đông người</a></li>
+                <li>Rửa tay thường xuyên/li>
+                <li>Đeo khẩu trang</li>
+                <li>Tránh nơi đông người</li>
+                <li>Tránh tiếp xúc vật nuôi</li>
               </ul>
             </div>
             <div class="three columns">
               <h5>Triệu chứng</h4>
               <ul>
-                <li><a href="#">Sốt</a></li>
-                <li><a href="#">Ho</a></li>
-                <li><a href="#">Khó thở</a></li>
+                <li>Sốt</li>
+                <li>Ho</li>
+                <li>Khó thở</li>
               </ul>
             </div>
             <div class="three columns">
@@ -79,7 +80,9 @@
       </footer>
 	  
     </div>
+    
 
+    </table>
     <script id="fullTable_template" type="text/html">
       <table class="u-full-width">
         <tr><th class="tHeader">Ngày</th><th class="tHeader">Nhiễm</th><th class="tHeader">Tử vong</th><th class="tHeader">Khỏi bệnh</th><th class="tHeader">Tăng nhiễm</th></tr>
@@ -106,9 +109,11 @@
           "filterDiv": "#fullTableFilter"
         }
 		dt = data;
-		document.getElementById('updatetime').innerText = dt[0]['Cập nhật']
-        Sheetsee.makeTable(tableOptions)
-        Sheetsee.initiateTableFilter(tableOptions)
+		document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
+        //Sheetsee.makeTable(tableOptions)
+        //Sheetsee.initiateTableFilter(tableOptions)
+        drawTable();
+
 		google.charts.setOnLoadCallback(drawAxisTickColors);
       }
 
@@ -121,13 +126,14 @@ function drawAxisTickColors() {
 	  data.addColumn({type: 'number', role: 'annotation'});
       data.addColumn('number', 'Chết');
 	  data.addColumn({type: 'number', role: 'annotation'});
-	  data.addColumn('number', 'Khỏi');
+    data.addColumn('number', 'Khỏi');
+    data.addColumn('number', 'Tăng nhiễm');
 	  //data.addColumn({type: 'number', role: 'annotation'});
 		for (i = 0;i<dt.length;i++){
 		var nn = parseInt(dt[i]['Nghi Nhiễm'])
 		var tv = parseInt(dt[i]['Tử vong'])
 		var kb = parseInt(dt[i]['Khỏi bệnh'])
-		data.addRows([[dt[i]['Ngày'],nn, nn, tv, tv, kb]]);
+		data.addRows([[dt[i]['Ngày'],nn, nn, tv, tv, kb, parseInt(dt[i]['Tăng nhiễm'])]]);
 		}
       
 
@@ -170,18 +176,39 @@ function drawAxisTickColors() {
             0: {style: 'point'}
 			},
 		chartArea:{left:50,top:10,width:'90%',height:'75%'},
-        colors: ['#4285f4', '#ea4335', '38761d'],
+        colors: ['#4285f4', '#ea4335', '#38761d', '#4374e0'],
         legend: { position: 'bottom' },
         series: {
             0: { pointSize: 6, pointShape: 'square', },
-            1: { pointSize: 4, pointShape: 'circle' },
-			2: { pointSize: 4, pointShape: 'circle' }
+            1: { pointSize: 6, pointShape: 'diamond' },
+            2: { pointSize: 4, pointShape: 'circle' },
+            3: { lineDashStyle: [1, 1] }
           },
         
       };
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       chart.draw(data, options);
     }
+
+    function drawTable() {
+        var column_names = ['Ngày', 'Nghi Nhiễm', 'Tử vong', 'Khỏi bệnh', 'Tăng nhiễm'];
+        
+        var html = '';
+        
+        
+        html += "<thead><tr>";
+        for(var i = 0; i < column_names.length; i++) {
+          html += '<th>' + column_names[i] +'</th>';
+        }
+        html += "</tr></thead>";
+        
+        html += '<tbody>';
+        for(var i = dt.length-1; i >= 0; i--) {
+          html += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nghi Nhiễm'] +'</td><td>' + dt[i]['Tử vong'] +'</td><td>' + dt[i]['Khỏi bệnh'] +'</td><td>' + dt[i]['Tăng nhiễm'] +'</td>' + '</tr>';
+        }
+        html += '</tbody>';
+        document.getElementById('pretty').innerHTML = html;
+      }
     </script>
   </body>
 </html>
