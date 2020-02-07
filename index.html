@@ -5,7 +5,7 @@
   <meta charset='utf-8'>
   <title>Cập nhật tình trạng virut Corona 2019 nCoV, Live update</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-
+  <meta http-equiv="refresh" content="300">
   <meta name="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
   <meta property="og:description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
   <meta itemprop="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update">
@@ -44,76 +44,66 @@
 <body>
   <div class="container">
     <h1>Virut Corona nCoV 2019</h1>
-    <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00:00</span>, tự động cập nhật sau 5 phút.</em>
-      <p>
+    <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00:00</span>, tự động cập nhật sau 5 phút.</em></p>
 
-        <div id="chart_div"></div>
+    <div id="chart_div"></div>
 
-        <div id="fullTable" class="row">
-          <h5>Thế giới</h5>
-          <table id="world" class="u-full-width"></table>
-        </div>
-        <hr>
-        <footer>
-          <div class="footer">
-            <div class="row">
-              <div class="three columns">
-                <h5>Kiến thức</h5>
-                <ul>
-                  <li><a
-                      href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus
-                      corona 2019 là gì?</a></li>
-                  <li><a
-                      href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn
-                      gốc của 2019-nCoV</a></li>
-                  <li><a
-                      href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Cơ
-                      chế lây lan</a></li>
-                </ul>
-              </div>
-              <div class="three columns">
-                <h5>Phòng ngừa</h5>
-                <ul>
-                  <li>Rửa tay thường xuyên</li>
-                  <li>Đeo khẩu trang</li>
-                  <li>Tránh nơi đông người</li>
-                  <li>Tránh tiếp xúc vật nuôi</li>
-                </ul>
-              </div>
-              <div class="three columns">
-                <h5>Triệu chứng</h5>
-                <ul>
-                  <li>Sốt</li>
-                  <li>Ho</li>
-                  <li>Khó thở</li>
-                </ul>
-              </div>
-              <div class="three columns">
-                <h5>Đường dây nóng</h5>
-                <ul>
-                  <li><a href="tel:19009095">1900-9095</a></li>
-                  <li><a href="tel:19003228">1900-3228</a></li>
-                </ul>
-              </div>
-            </div>
+    <div id="fullTable" class="row">
+      <h5>Thế giới</h5>
+      <table id="world" class="u-full-width"></table>
+    </div>
+    <hr>
+    <footer>
+      <div class="footer">
+        <div class="row">
+          <div class="three columns">
+            <h5>Kiến thức</h5>
+            <ul>
+              <li><a
+                  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/dich-2019-ncov/thong-tin-suc-khoe/thong-tin-day-du-ve-virus-corona-theo-huong-dan-cua-bo-y-te/">Virus
+                  corona 2019 là gì?</a></li>
+              <li><a
+                  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Nguồn
+                  gốc của 2019-nCoV</a></li>
+              <li><a
+                  href="https://www.vinmec.com/vi/tin-tuc/thong-tin-suc-khoe/suc-khoe-tong-quat/hoi-dap-day-du-ve-dich-virus-corona-2019/">Cơ
+                  chế lây lan</a></li>
+            </ul>
           </div>
+          <div class="three columns">
+            <h5>Phòng ngừa</h5>
+            <ul>
+              <li>Rửa tay thường xuyên</li>
+              <li>Đeo khẩu trang</li>
+              <li>Tránh nơi đông người</li>
+              <li>Tránh tiếp xúc vật nuôi</li>
+            </ul>
+          </div>
+          <div class="three columns">
+            <h5>Triệu chứng</h5>
+            <ul>
+              <li>Sốt</li>
+              <li>Ho</li>
+              <li>Khó thở</li>
+              <li>Ủ bệnh 2-14 ngày</li>
+            </ul>
+          </div>
+          <div class="three columns">
+            <h5>Đường dây nóng</h5>
+            <ul>
+              <li><a href="tel:19009095">1900-9095</a></li>
+              <li><a href="tel:19003228">1900-3228</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-        </footer>
+    </footer>
 
   </div>
   <div style="text-align: center;">
     <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
   </div>
-
-
-  <script id="fullTable_template" type="text/html">
-      <table class="u-full-width">
-        <tr><th class="tHeader">Ngày</th><th class="tHeader">Nhiễm</th><th class="tHeader">Tử vong</th><th class="tHeader">Khỏi bệnh</th><th class="tHeader">Tăng nhiễm</th></tr>
-          {{#rows}}
-            <tr><td>{{Ngày}}</td><td>{{Nghi Nhiễm}}</td><td>{{Tử vong}}</td><td>{{Khỏi bệnh}}</td><td>{{Tăng nhiễm}}</td></tr>
-          {{/rows}}
-      </table>
-    </script>
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -213,29 +203,20 @@
 
     function drawTable() {
       var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
-      //var column_names_vn = ['Ngày', 'Nhiễm', 'Chết', 'Khỏi', 'Tăng'];
       var html = '';
-      //var html_vn = '';
 
       html += "<thead><tr>";
-      //html_vn += "<thead><tr>";
       for (var i = 0; i < column_names.length; i++) {
         html += '<th>' + column_names[i] + '</th>';
-        //html_vn += '<th >' + column_names_vn[i] +'</th>';
       }
       html += "</tr></thead>";
-      //html_vn += "</tr></thead>";
 
       html += '<tbody>';
-      //html_vn += '<tbody>';
       for (var i = dt.length - 1; i >= 0; i--) {
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
-        //html_vn += '<tr><td>' + dt[i]['Ngày'] +'</td><td>' + dt[i]['Nhiễm'] +'</td><td>' + dt[i]['Chết'] +'</td><td>' + dt[i]['Khỏi'] +'</td><td>' + dt[i]['Tăng'] +'</td>' + '</tr>';
       }
       html += '</tbody>';
-      //html_vn += '</tbody>';
       document.getElementById('world').innerHTML = html;
-      //document.getElementById('vietnam').innerHTML = html_vn;
     }
   </script>
 </body>
