@@ -27,7 +27,7 @@
   <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Source+Code+Pro:400'
     rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="favicon.png">
-  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+  
   <link rel='stylesheet' type='text/css' href='style.css'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
@@ -52,6 +52,8 @@
       <h5>Thế giới</h5>
       <table id="world" class="u-full-width"></table>
     </div>
+    
+    <div><h5>Tin tức</h5><ul id="feed"></ul></div>
     <hr>
     <footer>
       <div class="footer">
@@ -105,6 +107,24 @@
     <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
   </div>
 
+  <script src="feednami.js"></script>
+  <script type="text/javascript">
+  const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
+  const textarea = document.getElementById('feed')
+  feednami.load(url)
+    .then(feed => {
+      textarea.innerHTML = ''
+      console.log(feed)
+      for(var i = 0; i < 10; i++){
+        var entry = feed.entries[i];
+        var day = entry.date.substring(0,10);
+        textarea.innerHTML += `<li><a href="${entry.link}">${entry.title}</a> <code>${day}</code></li>`
+        // the first 120 characters of the entry
+      }
+    })
+  </script>
+
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     function getData(){
@@ -116,20 +136,14 @@
 
     var dt;
     function showInfo(data) {
-      var tableOptions = {
-        "data": data,
-        "pagination": 50,
-        "tableDiv": "#fullTable",
-        "filterDiv": "#fullTableFilter"
+      if (document.getElementById('updatetime').innerText != data[0]['Cập nhật'])
+      {
+        dt = data;
+        document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
+        drawTable();
+        google.charts.setOnLoadCallback(drawAxisTickColors);
       }
-      dt = data;
-      document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
-      drawTable();
-
-      google.charts.setOnLoadCallback(drawAxisTickColors);
     }
-
-
 
     function drawAxisTickColors() {
       var data = new google.visualization.DataTable();
@@ -219,10 +233,10 @@
       html += '</tbody>';
       document.getElementById('world').innerHTML = html;
     }
-
-
-    setInterval(getData, 120000);
+    setInterval(getData, 60000);
   </script>
+
+  
 </body>
 
 </html>
