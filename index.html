@@ -209,20 +209,11 @@
     }
 
     function drawTable() {
-      //var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
       var html = '';
 
-      // html += "<thead><tr>";
-      // for (var i = 0; i < column_names.length; i++) {
-      //   html += '<th>' + column_names[i] + '</th>';
-      // }
-      // html += "</tr></thead>";
-
-      // html += '<tbody>';
       for (var i = dt.length - 1; i >= 0; i--) {
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
       }
-      // html += '</tbody>';
       document.getElementById('world').innerHTML = html;
       //Vietnam
       document.getElementById('vn-n').innerText = dt[dt.length - 1]['Nhiễm'];
@@ -234,16 +225,19 @@
   <script src="feednami.js"></script>
   <script type="text/javascript">
   const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
+  //const url = 'https://news.google.com/rss/search?q=corona&hl=vi&gl=VN&ceid=VN:vi';
   const textarea = document.getElementById('feed')
   feednami.load(url)
     .then(feed => {
-      textarea.innerHTML = ''
-      console.log(feed)
+      html = ''
       for(var i = 0; i < 10; i++){
         var entry = feed.entries[i];
         var day = entry.date.substring(0,10);
-        textarea.innerHTML += `<li><a href="${entry.link}" target="_blank">${entry.title}</a> <code>${day}</code></li>`
+        //html += `<li><a href="${entry.link}" target="_blank">${entry.title}</a> <code>${day}</code></li>`
+        html += `<li>${entry.description} <code>${entry.date.substring(0,10)}</code></li>`
       }
+      //console.log(feed.entries[0]);
+      document.getElementById('feed').innerHTML = html;
     })
   </script>
   
