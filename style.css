@@ -46,6 +46,11 @@
   .container {
     width: 85%;
     padding: 0; }
+  .column {
+    margin-left: 4%; }
+  .column:first-child {
+    margin-left: 0; }
+  .one-half.column                { width: 48%; }
 }
 
 /* For devices larger than 550px */
@@ -397,7 +402,7 @@ hr {
 }
   
 #logo {
-  background:url(logo.svg) top right no-repeat;
+  background:url(logo.svg) bottom right no-repeat;
 }
 
 /* Clearing

@@ -14,15 +14,15 @@
   <meta name="theme-color" content="#2f9697">
   <meta name="mobile-web-app-capable" content="yes">
 
-  <meta itemprop="name" content="ncov.ga">
+  <meta itemprop="name" content="Corona nCoV 2019 Live Update">
   <meta itemprop="image" content="https://ncov.ga/ncov.png">
 
   <meta property="og:url" content="https://ncov.ga" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="ncov.ga" />
+  <meta property="og:title" content="Corona nCoV 2019 Live Update" />
   <meta property="og:image" content="https://ncov.ga/ncov.png" />
 
-  <meta name="twitter:title" content="ncov.ga" />
+  <meta name="twitter:title" content="Corona nCoV 2019 Live Update" />
   <meta name="twitter:image" content="https://ncov.ga/ncov.png" />
 
   <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900,400italic|Open+Sans:400' rel='stylesheet' type='text/css'>
@@ -50,7 +50,10 @@
     <div id="fullTable" class="row">
       <div class="eight columns">
         <h5>Hiện tại</h5>
-      <table id="world" class="u-full-width"></table>
+      <table class="u-full-width">
+        <thead><tr><th>Ngày</th><th>Nhiễm (VN)</th><th>Tử vong (VN)</th><th>Bình phục (VN)</th><th>Nhiễm mới</th></tr></thead>
+        <tbody id="world"></tbody>
+      </table>
       </div>
       <div class="four columns">
         <h5>Việt Nam</h5>
@@ -144,7 +147,7 @@
       data.addColumn('number', 'Chết');
       data.addColumn({ type: 'number', role: 'annotation' });
       data.addColumn('number', 'Khỏi');
-      data.addColumn('number', 'Tăng nhiễm');
+      data.addColumn('number', 'Mới');
       //data.addColumn({type: 'number', role: 'annotation'});
       for (i = 0; i < dt.length; i++) {
         var nn = parseInt(dt[i]['Nghi Nhiễm'])
@@ -206,20 +209,20 @@
     }
 
     function drawTable() {
-      var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
+      //var column_names = ['Ngày', 'Nhiễm (VN)', 'Tử vong (VN)', 'Bình phục (VN)', 'Tăng nhiễm'];
       var html = '';
 
-      html += "<thead><tr>";
-      for (var i = 0; i < column_names.length; i++) {
-        html += '<th>' + column_names[i] + '</th>';
-      }
-      html += "</tr></thead>";
+      // html += "<thead><tr>";
+      // for (var i = 0; i < column_names.length; i++) {
+      //   html += '<th>' + column_names[i] + '</th>';
+      // }
+      // html += "</tr></thead>";
 
-      html += '<tbody>';
+      // html += '<tbody>';
       for (var i = dt.length - 1; i >= 0; i--) {
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
       }
-      html += '</tbody>';
+      // html += '</tbody>';
       document.getElementById('world').innerHTML = html;
       //Vietnam
       document.getElementById('vn-n').innerText = dt[dt.length - 1]['Nhiễm'];
