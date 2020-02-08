@@ -73,8 +73,8 @@
           <div class="one-half column">Tử vong<h3 id="vn-tv">-</h3>
           </div>
         </div>
-        <div style="overflow: hidden;background-color: #ddd;text-align: center;position: relative;">
-          <div id="region-name" style="position: absolute;top:0;left:10px;">&nbsp;</div>
+        <div style="overflow: hidden;background-color: #ddd;position: relative;">
+          <div id="region-name" style="position: absolute;top:280px;left:10px;">&nbsp;</div>
           <div id="map">
           </div>
           <div id="note">
@@ -239,7 +239,7 @@
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
         //add Tỉnh thành
         if (dt[i]['Tỉnh thành'] != '') {
-          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'] }
+          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'] }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
 
