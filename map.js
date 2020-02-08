@@ -1,6 +1,6 @@
 function setMap(){
     var rsr = Raphael('map', '294', '540');
-    rsr.setViewBox(0, 0, 485, 893, true);
+    rsr.setViewBox(0, 0, 485, 823, true);
     var regions = [];
 
     var paths = {
