@@ -453,3 +453,23 @@ there.
   padding: 4rem 0;
   margin-bottom: 0;}
 
+#note{
+font-size:0.8em;
+}
+span.circle{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  margin:0px 5px 0 5px;
+}
+span.circle.congbodich{
+  background-color:#FBC02D;
+  
+}
+span.circle.noidieutri{
+  color:#E2574C;
+  font-size:2em;
+  font-weight:bolder;
+  font-family:Arial;
+  line-height:10px;
+}
