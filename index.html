@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset='utf-8'>
   <title>Cập nhật tình trạng virut Corona 2019 nCoV, Live update</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-  
+
   <meta name="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
   <meta property="og:description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
   <meta itemprop="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update">
@@ -27,7 +28,7 @@
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="favicon.png">
-  
+
   <link rel='stylesheet' type='text/css' href='style.min.css'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
@@ -40,26 +41,37 @@
   </script>
 
 </head>
+
 <body>
   <div class="container">
     <h1 id="logo"><a href="/">Virut Corona nCoV 2019</a></h1>
-    <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00</span>, tự động cập nhật sau 5 phút.</em></p>
+    <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00</span>, tự động cập nhật sau mỗi 5 phút.</em></p>
 
     <div id="chart_div"></div>
 
     <div id="fullTable" class="row">
       <div class="eight columns">
         <h5>Hiện tại</h5>
-      <table class="u-full-width">
-        <thead><tr><th>Ngày</th><th>Nhiễm (VN)</th><th>Tử vong (VN)</th><th>Bình phục (VN)</th><th>Nhiễm mới</th></tr></thead>
-        <tbody id="world"></tbody>
-      </table>
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>Ngày</th>
+              <th>Nhiễm (VN)</th>
+              <th>Tử vong (VN)</th>
+              <th>Bình phục (VN)</th>
+              <th>Nhiễm mới</th>
+            </tr>
+          </thead>
+          <tbody id="world"></tbody>
+        </table>
       </div>
       <div class="four columns">
         <h5>Việt Nam</h5>
-        <div id="vn-stats"> 
-          <div class="one-half column">Nhiễm<h3 id="vn-n">-</h3></div>
-          <div class="one-half column">Tử vong<h3 id="vn-tv">-</h3></div>
+        <div id="vn-stats">
+          <div class="one-half column">Nhiễm<h3 id="vn-n">-</h3>
+          </div>
+          <div class="one-half column">Tử vong<h3 id="vn-tv">-</h3>
+          </div>
         </div>
         <div style="overflow: hidden;background-color: #ddd;text-align: center;position: relative;">
           <div id="region-name" style="position: absolute;top:0;left:10px;">&nbsp;</div>
@@ -70,11 +82,14 @@
             <!--<span class="circle noidieutri">+</span>Nơi điều trị -->
           </div>
         </div>
-        
+
       </div>
     </div>
-    
-    <div><h5>Tin tức</h5><ul id="feed"></ul></div>
+
+    <div>
+      <h5>Tin tức</h5>
+      <ul id="feed"></ul>
+    </div>
     <hr>
     <footer>
       <div class="footer">
@@ -84,7 +99,7 @@
             <ul>
               <li><a href="/whatiscorona.html">Virus corona 2019 là gì?</a></li>
               <li><a href="/whatiscorona.html">Nguồn gốc của 2019-nCoV</a></li>
-              <li><a  href="/whatiscorona.html">Cơ chế lây lan</a></li>
+              <li><a href="/whatiscorona.html">Cơ chế lây lan</a></li>
             </ul>
           </div>
           <div class="three columns">
@@ -123,11 +138,11 @@
   </div>
 
   <script src="raphael.min.js"></script>
-	<script src="map.min.js"></script>
+  <script src="map.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    function getData(){
+    function getData() {
       var URL = "1apbJy54knVUXcKpuerSrgkADdZaGJ05Xh3pqkhHZZsI"
       Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
     }
@@ -137,8 +152,7 @@
 
     var dt;
     function showInfo(data) {
-      if (document.getElementById('updatetime').innerText != data[0]['Cập nhật'])
-      {
+      if (document.getElementById('updatetime').innerText != data[0]['Cập nhật']) {
         dt = data;
         document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
         drawTable();
@@ -224,11 +238,11 @@
       for (var i = dt.length - 1; i >= 0; i--) {
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
         //add Tỉnh thành
-        if (dt[i]['Tỉnh thành'] != ''){
-          var obj = {n:dt[i]['Ca Nhiễm'], c:dt[i]['Ca Chết']}
+        if (dt[i]['Tỉnh thành'] != '') {
+          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'] }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
-        
+
       }
       document.getElementById('world').innerHTML = html;
       //Vietnam
@@ -240,23 +254,21 @@
 
   <script src="feednami.js"></script>
   <script type="text/javascript">
-  const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
-  //const url = 'https://news.google.com/rss/search?q=corona&hl=vi&gl=VN&ceid=VN:vi';
-  const textarea = document.getElementById('feed')
-  feednami.load(url)
-    .then(feed => {
-      html = ''
-      for(var i = 2; i < 12; i++){
-        var entry = feed.entries[i];
-        var day = entry.date.substring(0,10);
-        //html += `<li><a href="${entry.link}" target="_blank">${entry.title}</a> <code>${day}</code></li>`
-        html += `<li>${entry.description} <code>${entry.date.substring(0,10)}</code></li>`
-      }
-      //console.log(feed.entries[0]);
-      document.getElementById('feed').innerHTML = html;
-    })
+    const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
+    const textarea = document.getElementById('feed')
+    feednami.load(url)
+      .then(feed => {
+        html = ''
+        for (var i = 2; i < 12; i++) {
+          var entry = feed.entries[i];
+          var day = entry.date.substring(0, 10);
+          //html += `<li><a href="${entry.link}" target="_blank">${entry.title}</a> <code>${day}</code></li>`
+          html += `<li>${entry.description} <code>${entry.date.substring(0, 10)}</code></li>`
+        }
+        //console.log(feed.entries[0]);
+        document.getElementById('feed').innerHTML = html;
+      })
   </script>
-  
-  
+
 </body>
 </html>
