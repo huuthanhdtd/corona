@@ -16,15 +16,15 @@
   <meta name="mobile-web-app-capable" content="yes">
 
   <meta itemprop="name" content="Corona nCoV 2019 Live Update">
-  <meta itemprop="image" content="https://ncov.ga/ncov.png">
+  <meta itemprop="image" id="ogimage1" content="https://ncov.ga/ncov.png">
 
   <meta property="og:url" content="https://ncov.ga" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Corona nCoV 2019 Live Update" />
-  <meta property="og:image" content="https://ncov.ga/ncov.png" />
+  <meta property="og:image" id="ogimage2" content="https://ncov.ga/ncov.png" />
 
   <meta name="twitter:title" content="Corona nCoV 2019 Live Update" />
-  <meta name="twitter:image" content="https://ncov.ga/ncov.png" />
+  <meta name="twitter:image" id="ogimage3" content="https://ncov.ga/ncov.png" />
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="favicon.png">
@@ -229,6 +229,11 @@
 
       };
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      google.visualization.events.addListener(chart, 'ready', function () {
+        document.getElementById('ogimage1').setAttribute("content", chart.getImageURI()); //.innerHTML = '<img src="' + chart.getImageURI() + '">';
+        document.getElementById('ogimage2').setAttribute("content", chart.getImageURI());
+        document.getElementById('ogimage3').setAttribute("content", chart.getImageURI());
+      });
       chart.draw(data, options);
     }
 
