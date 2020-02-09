@@ -3,33 +3,33 @@
 
 <head>
   <meta charset='utf-8'>
-  <title>Cập nhật tình trạng virut Corona 2019 nCoV, Live update</title>
+  <title>新型コロナウイルス感染症の現在の状況</title>
   <meta name='viewport' content='width=device-width, initial-scale=1.0' />
 
-  <meta name="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
-  <meta property="og:description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
-  <meta itemprop="description" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update">
-  <meta name="keywords" content="Cập nhật tình trạng virut Corona 2019 nCoV, Live update" />
+  <meta name="description" content="新型コロナウイルス感染症の現在の状況" />
+  <meta property="og:description" content="新型コロナウイルス感染症の現在の状況" />
+  <meta itemprop="description" content="新型コロナウイルス感染症の現在の状況">
+  <meta name="keywords" content="新型コロナウイルス感染症の現在の状況" />
 
   <meta name="author" content="Cualuoidanang.com" />
   <meta name="theme-color" content="#2f9697">
   <meta name="mobile-web-app-capable" content="yes">
 
-  <meta itemprop="name" content="Corona nCoV 2019 Live Update">
+  <meta itemprop="name" content="新型コロナウイルス感染症の現在の状況">
   <meta itemprop="image" content="https://ncov.ga/ncov.png">
 
   <meta property="og:url" content="https://ncov.ga" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="Corona nCoV 2019 Live Update" />
+  <meta property="og:title" content="新型コロナウイルス感染症の現在の状況" />
   <meta property="og:image" content="https://ncov.ga/ncov.png" />
 
-  <meta name="twitter:title" content="Corona nCoV 2019 Live Update" />
+  <meta name="twitter:title" content="新型コロナウイルス感染症の現在の状況" />
   <meta name="twitter:image" content="https://ncov.ga/ncov.png" />
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
-  <link rel="shortcut icon" href="favicon.png">
+  <link rel="shortcut icon" href="../favicon.png">
 
-  <link rel='stylesheet' type='text/css' href='style.min.css'>
+  <link rel='stylesheet' type='text/css' href='../style.min.css'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
   <script>
@@ -44,36 +44,36 @@
 
 <body>
   <div class="container">
-    <h1 id="logo"><a href="/">Virut Corona nCoV 2019</a></h1>
-    <div style="float: right;"><a href="ja" title="日本語版">日本語版</a></div>
-    <p><em>Cập nhật đến <span id="updatetime">6/2/2019 18:00</span>, tự động cập nhật sau mỗi 5 phút.</em></p>
+    <h1 id="logo"><a href="/">Virus Corona 2019-nCoV</a></h1>
+    <div style="float: right;"><a href="ja" title="Tiếng Việt">Tiếng Việt</a></div>
+    <p><em><span id="updatetime">6/2/2019/2/10 18:00</span>版, 5分ごとで自動的に更新します.</em></p>
 
     <div id="chart_div"></div>
     <div>
-      Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a id="imageChart" download="ncov.png" href="#">hình ảnh</a>
+      <a class="" href="javascript:fbShare();">Facebookへシェア</a>, または <a id="imageChart" download="ncov.png" href="#">画像として保存</a>
     </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
-        <h5>Hiện tại</h5>
+        <h5>現在の状況</h5>
         <table class="u-full-width">
           <thead>
             <tr>
-              <th>Ngày</th>
-              <th>Nhiễm (VN)</th>
-              <th>Tử vong (VN)</th>
-              <th>Bình phục (VN)</th>
-              <th>Nhiễm mới</th>
+              <th>月日</th>
+              <th>感染 (VN)</th>
+              <th>死亡 (VN)</th>
+              <th>復帰 (VN)</th>
+              <th>新感染</th>
             </tr>
           </thead>
           <tbody id="world"></tbody>
         </table>
       </div>
       <div class="four columns">
-        <h5>Việt Nam</h5>
+        <h5>ベトナム</h5>
         <div id="vn-stats">
-          <div class="one-half column">Nhiễm<h3 id="vn-n">-</h3>
+          <div class="one-half column">感染<h3 id="vn-n">-</h3>
           </div>
-          <div class="one-half column">Tử vong<h3 id="vn-tv">-</h3>
+          <div class="one-half column">死亡<h3 id="vn-tv">-</h3>
           </div>
         </div>
         <div style="overflow: hidden;background-color: #ddd;position: relative;">
@@ -81,7 +81,7 @@
           <div id="map">
           </div>
           <div id="note">
-            <span class="circle congbodich">&nbsp;</span>Nơi có dịch
+            <span class="circle congbodich">&nbsp;</span>感染箇所
             <!--<span class="circle noidieutri">+</span>Nơi điều trị -->
           </div>
         </div>
@@ -90,7 +90,7 @@
     </div>
 
     <div>
-      <h5>Tin tức</h5>
+      <h5>ニュース</h5>
       <ul id="feed"></ul>
     </div>
     <hr>
@@ -98,33 +98,33 @@
       <div class="footer">
         <div class="row">
           <div class="three columns">
-            <h5>Kiến thức</h5>
+            <h5>知識</h5>
             <ul>
-              <li><a href="/whatiscorona.html">Virus corona 2019 là gì?</a></li>
-              <li><a href="/whatiscorona.html">Nguồn gốc của 2019-nCoV</a></li>
-              <li><a href="/whatiscorona.html">Cơ chế lây lan</a></li>
+              <li><a href="/whatiscorona.html">コロナウイルスとは?</a></li>
+              <li><a href="/whatiscorona.html">2019-nCoV</a></li>
+              <li><a href="/whatiscorona.html">感染の広がり</a></li>
             </ul>
           </div>
           <div class="three columns">
-            <h5>Phòng ngừa</h5>
+            <h5>予防</h5>
             <ul>
-              <li>Rửa tay thường xuyên</li>
-              <li>Đeo khẩu trang</li>
-              <li>Tránh nơi đông người</li>
-              <li>Tránh tiếp xúc vật nuôi</li>
+              <li>手をよく荒い</li>
+              <li>マスクをする</li>
+              <li>...</li>
+              <li>...</li>
             </ul>
           </div>
           <div class="three columns">
-            <h5>Triệu chứng</h5>
+            <h5>症状</h5>
             <ul>
-              <li>Sốt</li>
-              <li>Ho</li>
-              <li>Khó thở</li>
-              <li>Ủ bệnh 2-14 ngày</li>
+              <li>40℃程度の高熱</li>
+              <li>乾いた咳</li>
+              <li>息切れ</li>
+              <li>2-14日潜伏期間</li>
             </ul>
           </div>
           <div class="three columns">
-            <h5>Đường dây nóng</h5>
+            <h5>Hotline</h5>
             <ul>
               <li><a href="tel:19009095">1900-9095</a></li>
               <li><a href="tel:19003228">1900-3228</a></li>
@@ -137,11 +137,11 @@
   </div>
 
   <div style="text-align: center;">
-    <p>Phát triển bởi nht@huuthanhdtd.com. Dữ liệu: Bộ Y tế, WorldOMeters</p>
+    <p>Designed by nht@huuthanhdtd.com. 参照: ベトナムの厚生省, WorldOMeters</p>
   </div>
 
-  <script src="raphael.min.js"></script>
-  <script src="map.min.js"></script>
+  <script src="../raphael.min.js"></script>
+  <script src="../map.min.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -168,13 +168,13 @@
 
     function drawAxisTickColors() {
       var data = new google.visualization.DataTable();
-      data.addColumn('string', 'Ngày');
-      data.addColumn('number', 'Nhiễm');
+      data.addColumn('string', '月日');
+      data.addColumn('number', '感染');
       data.addColumn({ type: 'number', role: 'annotation' });
-      data.addColumn('number', 'Chết');
+      data.addColumn('number', '死亡');
       data.addColumn({ type: 'number', role: 'annotation' });
-      data.addColumn('number', 'Khỏi');
-      data.addColumn('number', 'Mới');
+      data.addColumn('number', '復帰');
+      data.addColumn('number', '新');
       //data.addColumn({type: 'number', role: 'annotation'});
       for (i = 0; i < dt.length; i++) {
         var nn = parseInt(dt[i]['Nghi Nhiễm'])
@@ -202,7 +202,7 @@
           slantedTextAngle: 90
         },
         vAxis: {
-          title: 'Người',
+          title: '者数',
           textStyle: {
             color: '#1a237e',
             fontSize: 12,
@@ -259,9 +259,9 @@
     setInterval(getData, 60000);
   </script>
 
-  <script src="feednami.js"></script>
+  <script src="../feednami.js"></script>
   <script type="text/javascript">
-    const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
+    const url = 'https://news.google.com/atom/search?q=corona&hl=ja&gl=JP&ceid=JP:ja'
     const textarea = document.getElementById('feed')
     feednami.load(url)
       .then(feed => {
@@ -280,7 +280,7 @@
     function fbShare() {
         var winTop = (screen.height / 2) - (520 / 2);
         var winLeft = (screen.width / 2) - (350 / 2);
-        window.open('https://www.facebook.com/sharer/sharer.php?u=https://ncov.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
+        window.open('https://www.facebook.com/sharer/sharer.php?u=https://ncov.ga/ja', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
         return false;
       }
   </script>
