@@ -16,15 +16,15 @@
   <meta name="mobile-web-app-capable" content="yes">
 
   <meta itemprop="name" content="Corona nCoV 2019 Live Update">
-  <meta itemprop="image" id="ogimage1" content="https://ncov.ga/ncov.png">
+  <meta itemprop="image" content="https://ncov.ga/ncov.png">
 
   <meta property="og:url" content="https://ncov.ga" />
   <meta property="og:type" content="article" />
   <meta property="og:title" content="Corona nCoV 2019 Live Update" />
-  <meta property="og:image" id="ogimage2" content="https://ncov.ga/ncov.png" />
+  <meta property="og:image" content="https://ncov.ga/ncov.png" />
 
   <meta name="twitter:title" content="Corona nCoV 2019 Live Update" />
-  <meta name="twitter:image" id="ogimage3" content="https://ncov.ga/ncov.png" />
+  <meta name="twitter:image" content="https://ncov.ga/ncov.png" />
 
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="favicon.png">
@@ -45,10 +45,12 @@
 <body>
   <div class="container">
     <h1 id="logo"><a href="/">Virut Corona nCoV 2019</a></h1>
-    <p><em>Cập nhật đến <span id="updatetime">2019/2/6 18:00</span>, tự động cập nhật sau mỗi 5 phút.</em></p>
+    <p><em>Cập nhật đến <span id="updatetime">6/2/2019 18:00</span>, tự động cập nhật sau mỗi 5 phút.</em></p>
 
     <div id="chart_div"></div>
-
+    <div>
+      Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a id="imageChart" download="ncov.png" href="#">hình ảnh</a>
+    </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
         <h5>Hiện tại</h5>
@@ -230,9 +232,8 @@
       };
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       google.visualization.events.addListener(chart, 'ready', function () {
-        document.getElementById('ogimage1').setAttribute("content", chart.getImageURI()); //.innerHTML = '<img src="' + chart.getImageURI() + '">';
-        document.getElementById('ogimage2').setAttribute("content", chart.getImageURI());
-        document.getElementById('ogimage3').setAttribute("content", chart.getImageURI());
+        document.getElementById('imageChart').setAttribute("href", chart.getImageURI()); //.setAttribute("download", "ncov" + document.getElementById('updatetime').innerText +".png");
+        document.getElementById('imageChart').setAttribute("download", `ncov${document.getElementById('updatetime').innerText}.png`);
       });
       chart.draw(data, options);
     }
@@ -258,6 +259,7 @@
   </script>
 
   <script src="feednami.js"></script>
+  <script src="imgur.js"></script>
   <script type="text/javascript">
     const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
     const textarea = document.getElementById('feed')
@@ -273,6 +275,14 @@
         //console.log(feed.entries[0]);
         document.getElementById('feed').innerHTML = html;
       })
+
+    //social share
+    function fbShare() {
+        var winTop = (screen.height / 2) - (520 / 2);
+        var winLeft = (screen.width / 2) - (350 / 2);
+        window.open('https://www.facebook.com/sharer/sharer.php?u=https://ncov.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
+        return false;
+      }
   </script>
 
 </body>
