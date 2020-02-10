@@ -71,10 +71,6 @@
       <div class="four columns">
         <h5>ベトナム</h5>
         <div id="vn-stats">
-          <div class="one-half column">感染<h3 id="vn-n">-</h3>
-          </div>
-          <div class="one-half column">死亡<h3 id="vn-tv">-</h3>
-          </div>
         </div>
         <div style="overflow: hidden;background-color: #ddd;position: relative;">
           <div id="region-name" style="position: absolute;top:280px;left:10px;">&nbsp;</div>
@@ -257,8 +253,7 @@
       }
       document.getElementById('world').innerHTML = html;
       //Vietnam
-      document.getElementById('vn-n').innerText = dt[dt.length - 1]['Nhiễm'];
-      document.getElementById('vn-tv').innerText = dt[dt.length - 1]['Chết'];
+      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">感染<h4>'+dt[dt.length - 1]['Nhiễm']+'</h4></div><div class="one-third column vn-tv">死亡<h4>'+dt[dt.length - 1]['Chết']+'</h4></div> <div class="one-third column vn-bp">復帰<h4>'+dt[dt.length - 1]['Khỏi']+'</h4></div>'
     }
     setInterval(getData, 60000);
   </script>

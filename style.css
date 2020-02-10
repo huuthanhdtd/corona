@@ -396,8 +396,12 @@ hr {
   margin-bottom:5px;
   padding-top:10px;
 }
-#vn-stats .column:last-child{
-  background-color:#999999!important;
+#vn-stats .column.vn-tv{
+  background-color:#999999;
+  color:white;
+}
+#vn-stats .column.vn-bp{
+  background-color:rgb(164, 201, 57);
   color:white;
 }
   
