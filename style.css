@@ -51,6 +51,7 @@
   .column:first-child {
     margin-left: 0; }
   .one-half.column                { width: 48%; }
+  .one-third.column               { width: 30.6666666667%; }
 }
 
 /* For devices larger than 550px */
