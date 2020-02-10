@@ -29,7 +29,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="favicon.png">
 
-  <link rel='stylesheet' type='text/css' href='style.min.css?v=1.1'>
+  <link rel='stylesheet' type='text/css' href='style.min.css?v=1.2'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
   <script>
@@ -85,6 +85,11 @@
       </div>
     </div>
 
+    <div class="history-tl-container">
+      <h5>Tổng hợp</h5>
+      <ul class="tl" id="timeline">
+      </ul>
+    </div>
     <div>
       <h5>Tin tức</h5>
       <ul id="feed"></ul>
@@ -237,6 +242,7 @@
 
     function drawTable() {
       var html = '';
+      var news = '';
       hasComfirmed = {};
       for (var i = dt.length - 1; i >= 0; i--) {
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
@@ -245,9 +251,15 @@
           var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'] }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
+        //show news
+        if (i > 1 && dt[i]['Cập nhật'] != '')
+        {
+          news += '<li class="tl-item"><div class="timestamp">'+dt[i]['Ngày']+'</div><div class="item-title">'+dt[i]['Cập nhật'].replace(/\n/g, '<br>')+'</div></li>';
+        }
 
       }
       document.getElementById('world').innerHTML = html;
+      document.getElementById('timeline').innerHTML = news;
       //Vietnam
       document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>'+dt[dt.length - 1]['Nhiễm']+'</h4></div><div class="one-third column vn-tv">Tử vong<h4>'+dt[dt.length - 1]['Chết']+'</h4></div> <div class="one-third column vn-bp">Bình phục<h4>'+dt[dt.length - 1]['Khỏi']+'</h4></div>'
     }
