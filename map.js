@@ -465,8 +465,11 @@ function setMap(){
                 label.innerHTML = '<strong>'+this.data('region') + `</strong><br>Nhiễm: ${obj.n}<br> Tử vong: ${obj.c}<br>Khỏi: ${obj.k}`;
             else
                 label.innerHTML = this.data('region');
+                
+            // label.style.left = (e.clientX + 0) + "px";
+            // label.style.top = (e.clientY + 0 + 30) + "px";
         });
-
+        
         regions[i].mouseout(function(e){
             // label.style.display = 'none';
             this.node.style.opacity = 1;
