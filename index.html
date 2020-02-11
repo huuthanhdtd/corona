@@ -147,8 +147,8 @@
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
     function getData() {
-      var URL = "1apbJy54knVUXcKpuerSrgkADdZaGJ05Xh3pqkhHZZsI"
-      Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
+      var URL = "1apbJy54knVUXcKpuerSrgkADdZaGJ05Xh3pqkhHZZsI";
+      Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true });
     }
     var hasComfirmed = [];
     document.addEventListener('DOMContentLoaded', getData());
@@ -164,6 +164,7 @@
         document.getElementById('map').innerHTML = '';
         setMap();
         google.charts.setOnLoadCallback(drawAxisTickColors);
+        getFeed();
       }
     }
 
@@ -271,18 +272,24 @@
   <script type="text/javascript">
     const url = 'https://news.google.com/atom/search?q=corona%20when%3A1h&hl=vi&gl=VN&ceid=VN:vi';
     const textarea = document.getElementById('feed');
-    feednami.load(url)
+    function getFeed(){
+      feednami.load(url)
       .then(feed => {
         html = '';
         var entries = feed.entries.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
         for (var i = 0; i < 10; i++) {
           var entry = entries[i];
+          if (!entry.date){
+            i--;
+            continue;
+          }
           var day = timeago(new Date(entry.date));
           html += `<li>${entry.description} <code>${day}</code></li>`
         }
         document.getElementById('feed').innerHTML = html;
-      })
-
+      });
+    }
+    
     //social share
     function fbShare() {
         var winTop = (screen.height / 2) - (520 / 2);
@@ -290,6 +297,7 @@
         window.open('https://www.facebook.com/sharer/sharer.php?u=https://ncov.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
         return false;
       }
+    
   </script>
 
 </body>
