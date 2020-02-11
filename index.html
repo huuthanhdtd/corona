@@ -269,18 +269,17 @@
 
   <script src="feednami.js"></script>
   <script type="text/javascript">
-    const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi'
-    const textarea = document.getElementById('feed')
+    const url = 'https://news.google.com/atom/search?q=corona&hl=vi&gl=VN&ceid=VN:vi';
+    const textarea = document.getElementById('feed');
     feednami.load(url)
       .then(feed => {
-        html = ''
-        for (var i = 2; i < 12; i++) {
-          var entry = feed.entries[i];
-          var day = entry.date.substring(0, 10);
-          //html += `<li><a href="${entry.link}" target="_blank">${entry.title}</a> <code>${day}</code></li>`
-          html += `<li>${entry.description} <code>${entry.date.substring(0, 10)}</code></li>`
+        html = '';
+        var entries = feed.entries.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
+        for (var i = 0; i < 10; i++) {
+          var entry = entries[i];
+          var day = timeago(new Date(entry.date));
+          html += `<li>${entry.description} <code>${day}</code></li>`
         }
-        //console.log(feed.entries[0]);
         document.getElementById('feed').innerHTML = html;
       })
 
