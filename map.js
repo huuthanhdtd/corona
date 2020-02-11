@@ -289,7 +289,8 @@ function setMap(){
         // Change if hasConfirmed fill colour to gold
         for (var key in hasComfirmed){
             if (regions[i].data('region') == key) {
-                regions[i].node.setAttribute('fill', '#FBC02D');
+                //console.log(hasComfirmed[key].opacity.toString(16).substring(0,2));
+                regions[i].node.setAttribute('fill', '#FBC0' + hasComfirmed[key].opacity.toString(16).substring(0,2)); //#fbc02d
             }
         }
 

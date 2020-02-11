@@ -119,7 +119,7 @@
             <h5>Triệu chứng</h5>
             <ul>
               <li>Sốt cao (90%)</li>
-              <li>Ho khan(80%)</li>
+              <li>Ho khan (80%)</li>
               <li>Khó thở (20%)</li>
               <li>Ủ bệnh 2-14 ngày</li>
             </ul>
@@ -244,11 +244,12 @@
       var html = '';
       var news = '';
       hasComfirmed = {};
+      var lastData = dt[dt.length - 1];
       for (var i = dt.length - 1; i >= 0; i--) {
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
         //add Tỉnh thành
         if (dt[i]['Tỉnh thành'] != '') {
-          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'] }
+          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'], opacity: parseInt(dt[i]['Ca Nhiễm'])/parseInt(lastData['Nhiễm'])*255 }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
         //show news
@@ -261,7 +262,7 @@
       document.getElementById('world').innerHTML = html;
       document.getElementById('timeline').innerHTML = news;
       //Vietnam
-      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>'+dt[dt.length - 1]['Nhiễm']+'</h4></div><div class="one-third column vn-tv">Tử vong<h4>'+dt[dt.length - 1]['Chết']+'</h4></div> <div class="one-third column vn-bp">Bình phục<h4>'+dt[dt.length - 1]['Khỏi']+'</h4></div>'
+      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>'+lastData['Nhiễm']+'</h4></div><div class="one-third column vn-tv">Tử vong<h4>'+lastData['Chết']+'</h4></div> <div class="one-third column vn-bp">Bình phục<h4>'+lastData['Khỏi']+'</h4></div>'
     }
     setInterval(getData, 60000);
   </script>
