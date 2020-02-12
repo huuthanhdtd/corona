@@ -29,7 +29,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="favicon.png">
 
-  <link rel='stylesheet' type='text/css' href='style.min.css?v=1.2'>
+  <link rel='stylesheet' type='text/css' href='style.min.css?v=1.3'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
   <script>
@@ -69,8 +69,14 @@
         </table>
       </div>
       <div class="four columns">
-        <h5>Việt Nam</h5>
-        <div id="vn-stats">
+        <div class="row">
+          <h5>Đang điều trị</h5>
+          <div id="activecases"></div>
+        </div>
+        <div class="row">
+          <h5>Việt Nam</h5>
+          <div id="vn-stats">
+          </div>
         </div>
         <div style="overflow: hidden;background-color: #ddd;position: relative;">
           <div id="region-name" style="position: absolute;top:280px;left:10px;">&nbsp;</div>
@@ -164,7 +170,7 @@
         document.getElementById('map').innerHTML = '';
         setMap();
         google.charts.setOnLoadCallback(drawAxisTickColors);
-        getFeed();
+        //getFeed();
       }
     }
 
@@ -262,6 +268,9 @@
       }
       document.getElementById('world').innerHTML = html;
       document.getElementById('timeline').innerHTML = news;
+      //Active cases
+      var activecases = lastData['Nghi Nhiễm']-lastData['Tử vong']-lastData['Khỏi bệnh'];
+      document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>'+activecases+'</strong><small> người</small></h3></div><div class="row"><div class="one-half column">Nhẹ<h4 style="color:#8080FF;margin-top:0">'+(activecases-lastData['Nghiêm trọng'])+'</h4></div> <div class="one-half column">Nghiêm trọng<h4 style="color:#ea4335;margin-top:0">'+lastData['Nghiêm trọng']+'</h4></div></div>';
       //Vietnam
       document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>'+lastData['Nhiễm']+'</h4></div><div class="one-third column vn-tv">Tử vong<h4>'+lastData['Chết']+'</h4></div> <div class="one-third column vn-bp">Bình phục<h4>'+lastData['Khỏi']+'</h4></div>'
     }
@@ -284,12 +293,19 @@
             continue;
           }
           var day = timeago(new Date(entry.date));
-          html += `<li>${entry.description} <code>${day}</code></li>`
+          html += `<li>${entry.description} <time class="timeago" data="${entry.date}">${day}</time></li>`
         }
         document.getElementById('feed').innerHTML = html;
+        setInterval(updateFeedTime, 60000);
       });
     }
-    
+    getFeed();
+    function updateFeedTime(){
+      var x = document.getElementsByClassName("timeago");
+      for (var i = 0; i < x.length; i++) {
+        x[i].innerText = timeago(new Date(x[i].getAttribute("data")));
+      }
+    }
     //social share
     function fbShare() {
         var winTop = (screen.height / 2) - (520 / 2);

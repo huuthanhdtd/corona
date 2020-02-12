@@ -322,12 +322,21 @@ code {
   background: #F1F1F1;
   border: 1px solid #E1E1E1;
   border-radius: 4px; 
-  font-family: "Open Sans", Roboto, Arial, sans-serif;}
+  }
 pre > code {
   display: block;
   padding: 1rem 1.5rem;
   white-space: pre; }
 
+time{
+  padding: .2rem .5rem;
+  margin: 0 .2rem;
+  font-size: 90%;
+  white-space: nowrap;
+  background: #F1F1F1;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px; 
+  }
 
 /* Tables
 ?????????????????????????????????????????????????? */
@@ -479,6 +488,12 @@ span.circle.noidieutri{
   font-family:Arial;
   line-height:10px;
 }
+
+/* Active Cases */
+#activecases{
+  text-align:center; border:1px solid #ddd;
+}
+
 /* Timeline */
 .history-tl-container ul.tl{
   margin:20px 0;
