@@ -264,7 +264,7 @@
         //show news
         if (i > 1 && dt[i]['Update'] != '')
         {
-          news += '<li class="tl-item"><div class="timestamp">'+dt[i]['Ngày']+'</div><div class="item-title">'+dt[i]['Update'].replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\[(.*)\]\((.*)\)/g,'<a href="$2" target="_blank">$1</a>')+'</div></li>';
+          news += '<li class="tl-item"><div class="timestamp">'+dt[i]['Ngày']+'</div><div class="item-title">'+dt[i]['Cập nhật'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g,'<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>')+'</div></li>';
         }
 
       }
