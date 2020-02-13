@@ -289,8 +289,9 @@ function setMap(){
         // Change if hasConfirmed fill colour to gold
         for (var key in hasComfirmed){
             if (regions[i].data('region') == key) {
-                //console.log(hasComfirmed[key].opacity.toString(16).substring(0,2));
-                regions[i].node.setAttribute('fill', '#FBC0' + hasComfirmed[key].opacity.toString(16).substring(0,2)); //#fbc02d
+                // console.log(hasComfirmed[key].opacity);
+                // console.log(Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2));
+                regions[i].node.setAttribute('fill', '#FBC0' + Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2)); //#fbc02d
             }
         }
 
