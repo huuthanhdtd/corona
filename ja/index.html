@@ -91,10 +91,8 @@
       </div>
     </div>
 
-    <div class="history-tl-container">
-      <h5>タイムライン</h5>
-      <ul class="tl" id="timeline">
-      </ul>
+    <div class="history-tl-container" id="timeline">
+      
     </div>
     <div>
       <h5>ニュース</h5>
@@ -165,9 +163,10 @@
 
     var dt;
     function showInfo(data) {
-      if (document.getElementById('updatetime').innerText != data[0]['Cập nhật']) {
+      var updatetime = getJaDate(data[0]['Cập nhật'].substring(0,10)) + data[0]['Cập nhật'].substring(10);
+      if (document.getElementById('updatetime').innerText != updatetime) {
         dt = data;
-        document.getElementById('updatetime').innerText = dt[0]['Cập nhật'];
+        document.getElementById('updatetime').innerText = updatetime;
         drawTable();
 
         document.getElementById('map').innerHTML = '';
@@ -191,7 +190,7 @@
         var nn = parseInt(dt[i]['Nghi Nhiễm'])
         var tv = parseInt(dt[i]['Tử vong'])
         var kb = parseInt(dt[i]['Khỏi bệnh'])
-        data.addRows([[dt[i]['Ngày'], nn, nn, tv, tv, kb, parseInt(dt[i]['Tăng nhiễm'])]]);
+        data.addRows([[getJaDate(dt[i]['Ngày']), nn, nn, tv, tv, kb, parseInt(dt[i]['Tăng nhiễm'])]]);
       }
 
 
@@ -256,21 +255,21 @@
       hasComfirmed = {};
       var lastData = dt[dt.length - 1];
       for (var i = dt.length - 1; i >= 0; i--) {
-        html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
+        html += '<tr><td>' + getJaDate(dt[i]['Ngày']) + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
         //add Tỉnh thành
         if (dt[i]['Tỉnh thành'] != '') {
           var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'], opacity: parseInt(dt[i]['Ca Nhiễm'])/parseInt(lastData['Nhiễm'])*255 }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
         //show news
-        if (i > 1 && dt[i]['Cập nhật'] != '')
+        if (i > 1 && dt[i]['Update'] != '')
         {
           news += '<li class="tl-item"><div class="timestamp">'+dt[i]['Ngày']+'</div><div class="item-title">'+dt[i]['Cập nhật'].replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\[(.*)\]\((.*)\)/g,'<a href="$2" target="_blank">$1</a>')+'</div></li>';
         }
 
       }
       document.getElementById('world').innerHTML = html;
-      if (news) document.getElementById('timeline').innerHTML = news;
+      if (news) document.getElementById('timeline').innerHTML = '<h5>タイムライン</h5><ul class="tl">'+news+'</ul>';
       //Active cases
       var activecases = lastData['Nghi Nhiễm']-lastData['Tử vong']-lastData['Khỏi bệnh'];
       document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>'+activecases+'</strong><small> 者</small></h3></div><div class="row"><div class="one-half column">軽い<h4 style="color:#8080FF;margin-top:0">'+(activecases-lastData['Nghiêm trọng'])+'</h4></div> <div class="one-half column">厳重<h4 style="color:#ea4335;margin-top:0">'+lastData['Nghiêm trọng']+'</h4></div></div>';
