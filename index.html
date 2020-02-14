@@ -50,10 +50,9 @@
 
     <div id="chart_div"></div>
     <div class="row">
-      <div class="eight columns">Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a
+      <div class="four columns"><button class="toggle" col="2">Ẩn số nhiễm</button> <button class="toggle" col="4">Ẩn số chết</button></div>
+      <div class="eight columns" style="text-align: right;">Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a
           id="imageChart" download="ncov.png" href="#">hình ảnh</a></div>
-      <div class="four columns"><button class="toggle" data="false" col="2">Ẩn số nhiễm</button> <button class="toggle"
-          data="false" col="4">Ẩn số chết</button></div>
     </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
@@ -165,6 +164,7 @@
     google.charts.load('current', { packages: ['corechart', 'line'] });
 
     var dt;
+    var cols = [];
     function showInfo(data) {
       if (document.getElementById('updatetime').innerText != data[0]['Cập nhật']) {
         dt = data;
@@ -250,13 +250,14 @@
       });
       chart.draw(data, options);
 
-      var cols = [];
+      
       [].forEach.call(document.getElementsByClassName("toggle"), function (el) {
-        document.addEventListener('click', handleClickEvents, false);
-        cols[el.getAttribute('col')] = true;
+        document.addEventListener('click', handleClickEvents, el);
+        if (!cols) cols[el.getAttribute('col')] = true; else toggle(el);
       });
-      function handleClickEvents(e) {
-        var el = event.target;
+      function toggle(el){
+        // var el = event.target;
+        // var el = e;
         var col = parseInt(el.getAttribute('col'));
         view = new google.visualization.DataView(data);
         var setCols = [0, 1, 3, 5, 6];
@@ -271,6 +272,9 @@
         view.setColumns(setCols.sort());
         chart.draw(view, options);
         // setCookie('covid19.ga', cols, '');
+      }
+      function handleClickEvents(e) {
+        toggle(event.target);
       }
     }
 
