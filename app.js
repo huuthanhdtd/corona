@@ -24,23 +24,23 @@ function timeago(date) {
     var seconds = Math.floor((new Date() - date) / 1000);
     var interval = Math.floor(seconds / 31536000);
     if (interval > 1) {
-      return interval + " n?m tr??c";
+      return interval + " năm trước";
     }
     interval = Math.floor(seconds / 2592000);
     if (interval > 1) {
-      return interval + " th?ng tr??c";
+      return interval + " tháng trước";
     }
     interval = Math.floor(seconds / 86400);
     if (interval > 1) {
-      return interval + " ng?y tr??c";
+      return interval + " ngày trước";
     }
     interval = Math.floor(seconds / 3600);
     if (interval > 1) {
-      return interval + " gi? tr??c";
+      return interval + " giờ trước";
     }
     interval = Math.floor(seconds / 60);
     if (interval > 1) {
-      return interval + " ph?t tr??c";
+      return interval + " phút trước";
     }
-    return "v?i gi?y tr??c";
+    return "vài giây trước";
   }

@@ -51,8 +51,8 @@
     <div id="chart_div"></div>
     <div class="row">
       <div class="four columns"><button class="toggle" col="2">Ẩn số nhiễm</button> <button class="toggle" col="4">Ẩn số chết</button></div>
-      <div class="eight columns" style="text-align: right;">Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a
-          id="imageChart" download="ncov.png" href="#">hình ảnh</a></div>
+      <div class="eight columns" style="text-align: right;">Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a id="imageChart" download="ncov.png" href="#">hình
+          ảnh</a></div>
     </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
@@ -173,12 +173,12 @@
 
         document.getElementById('map').innerHTML = '';
         setMap();
-        google.charts.setOnLoadCallback(drawAxisTickColors);
+        google.charts.setOnLoadCallback(drawGraph);
         //getFeed();
       }
     }
 
-    function drawAxisTickColors() {
+    function drawGraph() {
       var data = new google.visualization.DataTable();
       data.addColumn('string', 'Ngày');
       data.addColumn('number', 'Nhiễm');
@@ -250,17 +250,19 @@
       });
       chart.draw(data, options);
 
-      
-      [].forEach.call(document.getElementsByClassName("toggle"), function (el) {
-        document.addEventListener('click', handleClickEvents, el);
-        if (!cols) cols[el.getAttribute('col')] = true; else toggle(el);
-      });
-      function toggle(el){
-        // var el = event.target;
-        // var el = e;
+      var t = document.getElementsByClassName("toggle");
+      for (var i = 0; i < t.length; i++) {
+        t[i].onclick = function (e) { toggle(this); }
+        if (cols.length < 4) {
+          cols[t[i].getAttribute('col')] = true;
+        }
+        else {
+          if (cols[t[i].getAttribute('col')] == false || cols[t[i].getAttribute('col') + 1] == false) refreshChart();
+        }
+      };
+      function toggle(el) {
         var col = parseInt(el.getAttribute('col'));
         view = new google.visualization.DataView(data);
-        var setCols = [0, 1, 3, 5, 6];
         if (cols[col] == true) {
           el.innerText = el.innerText.replace('ẨN', 'HIỆN');
           cols[col] = false;
@@ -268,13 +270,14 @@
           el.innerText = el.innerText.replace('HIỆN', 'ẨN');
           cols[col] = true;
         }
+        refreshChart();
+      }
+      function refreshChart() {
+        var setCols = [0, 1, 3, 5, 6];
         cols.forEach(function (c, i) { if (c == true) setCols.push(i); });
+        view = new google.visualization.DataView(data);
         view.setColumns(setCols.sort());
         chart.draw(view, options);
-        // setCookie('covid19.ga', cols, '');
-      }
-      function handleClickEvents(e) {
-        toggle(event.target);
       }
     }
 
