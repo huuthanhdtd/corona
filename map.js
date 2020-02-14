@@ -1,4 +1,4 @@
-function setMap(){
+async function setMap(){
     var rsr = Raphael('map', '294', '540');
     rsr.setViewBox(0, 0, 485, 823, true);
     var regions = [];

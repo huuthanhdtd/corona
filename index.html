@@ -49,8 +49,11 @@
     <p><em>Cập nhật đến <span id="updatetime">6/2/2019 18:00</span>, tự động cập nhật sau mỗi 5 phút.</em></p>
 
     <div id="chart_div"></div>
-    <div>
-      Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a id="imageChart" download="ncov.png" href="#">hình ảnh</a>
+    <div class="row">
+      <div class="eight columns">Chia sẻ lên <a class="" href="javascript:fbShare();">facebook</a>, hoặc lưu <a
+          id="imageChart" download="ncov.png" href="#">hình ảnh</a></div>
+      <div class="four columns"><button class="toggle" data="false" col="2">Ẩn số nhiễm</button> <button class="toggle"
+          data="false" col="4">Ẩn số chết</button></div>
     </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
@@ -127,7 +130,7 @@
               <li>Sốt cao (90%)</li>
               <li>Ho khan (80%)</li>
               <li>Khó thở (20%)</li>
-              <li>Ủ bệnh 2-14 ngày</li>
+              <li>Ủ bệnh 2-24? ngày</li>
             </ul>
           </div>
           <div class="three columns">
@@ -149,6 +152,7 @@
 
   <script src="raphael.min.js"></script>
   <script src="map.min.js"></script>
+  <script src="app.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
@@ -237,7 +241,7 @@
           2: { pointSize: 4, pointShape: 'circle' },
           3: { lineDashStyle: [1, 1] }
         },
-        
+
       };
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       google.visualization.events.addListener(chart, 'ready', function () {
@@ -245,6 +249,29 @@
         document.getElementById('imageChart').setAttribute("download", `ncov${document.getElementById('updatetime').innerText}.png`);
       });
       chart.draw(data, options);
+
+      var cols = [];
+      [].forEach.call(document.getElementsByClassName("toggle"), function (el) {
+        document.addEventListener('click', handleClickEvents, false);
+        cols[el.getAttribute('col')] = true;
+      });
+      function handleClickEvents(e) {
+        var el = event.target;
+        var col = parseInt(el.getAttribute('col'));
+        view = new google.visualization.DataView(data);
+        var setCols = [0, 1, 3, 5, 6];
+        if (cols[col] == true) {
+          el.innerText = el.innerText.replace('ẨN', 'HIỆN');
+          cols[col] = false;
+        } else {
+          el.innerText = el.innerText.replace('HIỆN', 'ẨN');
+          cols[col] = true;
+        }
+        cols.forEach(function (c, i) { if (c == true) setCols.push(i); });
+        view.setColumns(setCols.sort());
+        chart.draw(view, options);
+        // setCookie('covid19.ga', cols, '');
+      }
     }
 
     function drawTable() {
@@ -256,23 +283,22 @@
         html += '<tr><td>' + dt[i]['Ngày'] + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
         //add Tỉnh thành
         if (dt[i]['Tỉnh thành'] != '') {
-          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'], opacity: parseInt(dt[i]['Ca Nhiễm'])/parseInt(lastData['Nhiễm'])*255 }
+          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'], opacity: parseInt(dt[i]['Ca Nhiễm']) / parseInt(lastData['Nhiễm']) * 255 }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
         //show news
-        if (i > 1 && dt[i]['Cập nhật'] != '')
-        {
-          news += '<li class="tl-item"><div class="timestamp">'+dt[i]['Ngày']+'</div><div class="item-title">'+dt[i]['Cập nhật'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g,'<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>')+'</div></li>';
+        if (i > 1 && dt[i]['Cập nhật'] != '') {
+          news += '<li class="tl-item"><div class="timestamp">' + dt[i]['Ngày'] + '</div><div class="item-title">' + dt[i]['Cập nhật'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
         }
 
       }
       document.getElementById('world').innerHTML = html;
       document.getElementById('timeline').innerHTML = news;
       //Active cases
-      var activecases = lastData['Nghi Nhiễm']-lastData['Tử vong']-lastData['Khỏi bệnh'];
-      document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>'+activecases+'</strong><small> người</small></h3></div><div class="row"><div class="one-half column">Nhẹ<h4 style="color:#8080FF;margin-top:0">'+(activecases-lastData['Nghiêm trọng'])+'</h4></div> <div class="one-half column">Nghiêm trọng<h4 style="color:#ea4335;margin-top:0">'+lastData['Nghiêm trọng']+'</h4></div></div>';
+      var activecases = lastData['Nghi Nhiễm'] - lastData['Tử vong'] - lastData['Khỏi bệnh'];
+      document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> người</small></h3></div><div class="row"><div class="one-half column">Nhẹ<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['Nghiêm trọng']) + '</h4></div> <div class="one-half column">Nghiêm trọng<h4 style="color:#ea4335;margin-top:0">' + lastData['Nghiêm trọng'] + '</h4></div></div>';
       //Vietnam
-      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>'+lastData['Nhiễm']+'</h4></div><div class="one-third column vn-tv">Tử vong<h4>'+lastData['Chết']+'</h4></div> <div class="one-third column vn-bp">Bình phục<h4>'+lastData['Khỏi']+'</h4></div>'
+      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>' + lastData['Nhiễm'] + '</h4></div><div class="one-third column vn-tv">Tử vong<h4>' + lastData['Chết'] + '</h4></div> <div class="one-third column vn-bp">Bình phục<h4>' + lastData['Khỏi'] + '</h4></div>'
     }
     setInterval(getData, 60000);
   </script>
@@ -281,26 +307,26 @@
   <script type="text/javascript">
     const url = 'https://news.google.com/atom/search?q=corona%20when%3A1h&hl=vi&gl=VN&ceid=VN:vi';
     const textarea = document.getElementById('feed');
-    function getFeed(){
+    function getFeed() {
       feednami.load(url)
-      .then(feed => {
-        html = '';
-        var entries = feed.entries.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
-        for (var i = 0; i < 10; i++) {
-          var entry = entries[i];
-          if (!entry.date){
-            i--;
-            continue;
+        .then(feed => {
+          html = '';
+          var entries = feed.entries.sort(function (a, b) { return new Date(b.date) - new Date(a.date) });
+          for (var i = 0; i < 10; i++) {
+            var entry = entries[i];
+            if (!entry.date) {
+              i--;
+              continue;
+            }
+            var day = timeago(new Date(entry.date));
+            html += `<li>${entry.description} <time class="timeago" data="${entry.date}">${day}</time></li>`
           }
-          var day = timeago(new Date(entry.date));
-          html += `<li>${entry.description} <time class="timeago" data="${entry.date}">${day}</time></li>`
-        }
-        document.getElementById('feed').innerHTML = html;
-        setInterval(updateFeedTime, 60000);
-      });
+          document.getElementById('feed').innerHTML = html;
+          setInterval(updateFeedTime, 60000);
+        });
     }
     getFeed();
-    function updateFeedTime(){
+    function updateFeedTime() {
       var x = document.getElementsByClassName("timeago");
       for (var i = 0; i < x.length; i++) {
         x[i].innerText = timeago(new Date(x[i].getAttribute("data")));
@@ -308,13 +334,14 @@
     }
     //social share
     function fbShare() {
-        var winTop = (screen.height / 2) - (520 / 2);
-        var winLeft = (screen.width / 2) - (350 / 2);
-        window.open('https://www.facebook.com/sharer/sharer.php?u=https://covid19.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
-        return false;
-      }
-    
+      var winTop = (screen.height / 2) - (520 / 2);
+      var winLeft = (screen.width / 2) - (350 / 2);
+      window.open('https://www.facebook.com/sharer/sharer.php?u=https://covid19.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
+      return false;
+    }
+
   </script>
 
 </body>
+
 </html>

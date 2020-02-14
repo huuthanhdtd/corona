@@ -50,7 +50,8 @@
 
     <div id="chart_div"></div>
     <div>
-      <a class="" href="javascript:fbShare();">Facebook</a>へシェア, または <a id="imageChart" download="ncov.png" href="#">画像として保存</a>
+      <a class="" href="javascript:fbShare();">Facebook</a>へシェア, または <a id="imageChart" download="ncov.png"
+        href="#">画像として保存</a>
     </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
@@ -92,7 +93,7 @@
     </div>
 
     <div class="history-tl-container" id="timeline">
-      
+
     </div>
     <div>
       <h5>ニュース</h5>
@@ -121,10 +122,10 @@
           <div class="three columns">
             <h5>症状</h5>
             <ul>
-              <li>40℃程度の高熱</li>
-              <li>乾いた咳</li>
-              <li>息切れ</li>
-              <li>2-14日潜伏期間</li>
+              <li>40℃程度の高熱 (98%)</li>
+              <li>乾いた咳（76%）</li>
+              <li>息切れ（55%）</li>
+              <li>2-24?日潜伏期間</li>
             </ul>
           </div>
           <div class="three columns">
@@ -146,11 +147,11 @@
 
   <script src="../raphael.min.js"></script>
   <script src="../map.min.js"></script>
+  <script src="../app.js"></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script type="text/javascript">
-    function getJaDate(date)
-    {
+    function getJaDate(date) {
       return date.split("/").reverse().join("/");
     }
     function getData() {
@@ -163,7 +164,7 @@
 
     var dt;
     function showInfo(data) {
-      var updatetime = getJaDate(data[0]['Cập nhật'].substring(0,10)) + data[0]['Cập nhật'].substring(10);
+      var updatetime = getJaDate(data[0]['Cập nhật'].substring(0, 10)) + data[0]['Cập nhật'].substring(10);
       if (document.getElementById('updatetime').innerText != updatetime) {
         dt = data;
         document.getElementById('updatetime').innerText = updatetime;
@@ -239,7 +240,7 @@
           2: { pointSize: 4, pointShape: 'circle' },
           3: { lineDashStyle: [1, 1] }
         },
-        
+
       };
       var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
       google.visualization.events.addListener(chart, 'ready', function () {
@@ -258,23 +259,22 @@
         html += '<tr><td>' + getJaDate(dt[i]['Ngày']) + '</td><td>' + dt[i]['Nghi Nhiễm'] + ' (' + dt[i]['Nhiễm'] + ')</td><td>' + dt[i]['Tử vong'] + ' (' + dt[i]['Chết'] + ')</td><td>' + dt[i]['Khỏi bệnh'] + ' (' + dt[i]['Khỏi'] + ')</td><td>' + dt[i]['Tăng nhiễm'] + '</td>' + '</tr>';
         //add Tỉnh thành
         if (dt[i]['Tỉnh thành'] != '') {
-          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'], opacity: parseInt(dt[i]['Ca Nhiễm'])/parseInt(lastData['Nhiễm'])*255 }
+          var obj = { n: dt[i]['Ca Nhiễm'], c: dt[i]['Ca Chết'], k: dt[i]['Ca Khỏi'], opacity: parseInt(dt[i]['Ca Nhiễm']) / parseInt(lastData['Nhiễm']) * 255 }
           hasComfirmed[dt[i]['Tỉnh thành']] = obj;
         }
         //show news
-        if (i > 1 && dt[i]['Update'] != '')
-        {
-          news += '<li class="tl-item"><div class="timestamp">'+dt[i]['Ngày']+'</div><div class="item-title">'+dt[i]['Update'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g,'<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>')+'</div></li>';
+        if (i > 1 && dt[i]['Update'] != '') {
+          news += '<li class="tl-item"><div class="timestamp">' + dt[i]['Ngày'] + '</div><div class="item-title">' + dt[i]['Update'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
         }
 
       }
       document.getElementById('world').innerHTML = html;
-      if (news) document.getElementById('timeline').innerHTML = '<h5>タイムライン</h5><ul class="tl">'+news+'</ul>';
+      if (news) document.getElementById('timeline').innerHTML = '<h5>タイムライン</h5><ul class="tl">' + news + '</ul>';
       //Active cases
-      var activecases = lastData['Nghi Nhiễm']-lastData['Tử vong']-lastData['Khỏi bệnh'];
-      document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>'+activecases+'</strong><small> 患者</small></h3></div><div class="row"><div class="one-half column">軽症<h4 style="color:#8080FF;margin-top:0">'+(activecases-lastData['Nghiêm trọng'])+'</h4></div> <div class="one-half column">重病<h4 style="color:#ea4335;margin-top:0">'+lastData['Nghiêm trọng']+'</h4></div></div>';
+      var activecases = lastData['Nghi Nhiễm'] - lastData['Tử vong'] - lastData['Khỏi bệnh'];
+      document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> 患者</small></h3></div><div class="row"><div class="one-half column">軽症<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['Nghiêm trọng']) + '</h4></div> <div class="one-half column">重病<h4 style="color:#ea4335;margin-top:0">' + lastData['Nghiêm trọng'] + '</h4></div></div>';
       //Vietnam
-      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">感染<h4>'+lastData['Nhiễm']+'</h4></div><div class="one-third column vn-tv">死亡<h4>'+lastData['Chết']+'</h4></div> <div class="one-third column vn-bp">復帰<h4>'+lastData['Khỏi']+'</h4></div>'
+      document.getElementById('vn-stats').innerHTML = '<div class="one-third column">感染<h4>' + lastData['Nhiễm'] + '</h4></div><div class="one-third column vn-tv">死亡<h4>' + lastData['Chết'] + '</h4></div> <div class="one-third column vn-bp">復帰<h4>' + lastData['Khỏi'] + '</h4></div>'
     }
     setInterval(getData, 60000);
   </script>
@@ -283,26 +283,26 @@
   <script type="text/javascript">
     const url = 'https://news.google.com/atom/search?q=corona%20&hl=ja&gl=JP&ceid=JP:ja';
     const textarea = document.getElementById('feed');
-    function getFeed(){
+    function getFeed() {
       feednami.load(url)
-      .then(feed => {
-        html = '';
-        var entries = feed.entries.sort(function(a, b){return new Date(b.date) - new Date(a.date)});
-        for (var i = 0; i < 10; i++) {
-          var entry = entries[i];
-          if (!entry.date){
-            i--;
-            continue;
+        .then(feed => {
+          html = '';
+          var entries = feed.entries.sort(function (a, b) { return new Date(b.date) - new Date(a.date) });
+          for (var i = 0; i < 10; i++) {
+            var entry = entries[i];
+            if (!entry.date) {
+              i--;
+              continue;
+            }
+            var day = timeago(new Date(entry.date));
+            html += `<li>${entry.description} <time class="timeago" data="${entry.date}">${day}</time></li>`
           }
-          var day = timeago(new Date(entry.date));
-          html += `<li>${entry.description} <time class="timeago" data="${entry.date}">${day}</time></li>`
-        }
-        document.getElementById('feed').innerHTML = html;
-        setInterval(updateFeedTime, 60000);
-      });
+          document.getElementById('feed').innerHTML = html;
+          setInterval(updateFeedTime, 60000);
+        });
     }
     getFeed();
-    function updateFeedTime(){
+    function updateFeedTime() {
       var x = document.getElementsByClassName("timeago");
       for (var i = 0; i < x.length; i++) {
         x[i].innerText = timeago(new Date(x[i].getAttribute("data")));
@@ -310,12 +310,13 @@
     }
     //social share
     function fbShare() {
-        var winTop = (screen.height / 2) - (520 / 2);
-        var winLeft = (screen.width / 2) - (350 / 2);
-        window.open('https://www.facebook.com/sharer/sharer.php?u=https://covid19.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
-        return false;
-      }
+      var winTop = (screen.height / 2) - (520 / 2);
+      var winLeft = (screen.width / 2) - (350 / 2);
+      window.open('https://www.facebook.com/sharer/sharer.php?u=https://covid19.ga/', 'sharer', 'top=' + winTop + ',left=' + winLeft + ',toolbar=0,status=0,width=520,height=350');
+      return false;
+    }
   </script>
 
 </body>
+
 </html>
