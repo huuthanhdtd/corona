@@ -22,7 +22,6 @@ function getSheet() {
 
 function showData(json) {
   var data = [];
-  console.log(json);
   json.feed.entry.forEach(entry => {
     var row = {};
       for (const [key, value] of Object.entries(entry)) {
@@ -56,13 +55,13 @@ function showInfo(data) {
 
 function drawGraph() {
   var data = new google.visualization.DataTable();
-  data.addColumn('string', 'Ngày');
-  data.addColumn('number', 'Nhiễm');
+  data.addColumn('string', lang['Ngày']);
+  data.addColumn('number', lang['Nhiễm']);
   data.addColumn({ type: 'number', role: 'annotation' });
-  data.addColumn('number', 'Chết');
+  data.addColumn('number', lang['Chết']);
   data.addColumn({ type: 'number', role: 'annotation' });
-  data.addColumn('number', 'Khỏi');
-  data.addColumn('number', 'Mới');
+  data.addColumn('number', lang['Khỏi']);
+  data.addColumn('number', lang['Mới']);
   //data.addColumn({type: 'number', role: 'annotation'});
   for (i = 0; i < dt.length; i++) {
     var nn = parseInt(dt[i]['gsx$confirmed'])
@@ -170,8 +169,8 @@ async function drawTable() {
       hasComfirmed[dt[i]['gsx$tỉnhthành']] = obj;
     }
     //show news
-    if (i > 1 && dt[i]['gsx$cậpnhật'] != '') {
-      news += '<li class="tl-item"><div class="timestamp">' + dt[i]['gsx$date'] + '</div><div class="item-title">' + dt[i]['gsx$cậpnhật'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
+    if (i > 1 && dt[i][lang['gsx$cậpnhật']] != '') {
+      news += '<li class="tl-item"><div class="timestamp">' + dt[i]['gsx$date'] + '</div><div class="item-title">' + dt[i][lang['gsx$cậpnhật']].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
     }
 
   }
@@ -179,19 +178,19 @@ async function drawTable() {
   document.getElementById('timeline').innerHTML = news;
   //Active cases
   var activecases = lastData['gsx$confirmed'] - lastData['gsx$deaths'] - lastData['gsx$recovered'];
-  document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> người</small></h3></div><div class="row"><div class="one-half column">Nhẹ<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['gsx$critical']) + '</h4></div> <div class="one-half column">Nghiêm trọng<h4 style="color:#ea4335;margin-top:0">' + lastData['gsx$critical'] + '</h4></div></div>';
+  document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> '+lang['người']+'</small></h3></div><div class="row"><div class="one-half column">'+lang['Nhẹ']+'<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['gsx$critical']) + '</h4></div> <div class="one-half column">'+lang['Nghiêm trọng']+'<h4 style="color:#ea4335;margin-top:0">' + lastData['gsx$critical'] + '</h4></div></div>';
   //Vietnam
-  document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>' + lastData['gsx$nhiễm'] + '</h4></div><div class="one-third column vn-tv">Tử vong<h4>' + lastData['gsx$chết'] + '</h4></div> <div class="one-third column vn-bp">Bình phục<h4>' + lastData['gsx$khỏi'] + '</h4></div>'
+  document.getElementById('vn-stats').innerHTML = '<div class="one-third column">'+lang['Nhiễm']+'<h4>' + lastData['gsx$nhiễm'] + '</h4></div><div class="one-third column vn-tv">'+lang['Tử vong']+'<h4>' + lastData['gsx$chết'] + '</h4></div> <div class="one-third column vn-bp">'+lang['Bình phục']+'<h4>' + lastData['gsx$khỏi'] + '</h4></div>'
 }
 setInterval(getSheet, 60000);
 
 var x = document.createElement("div");
 x.style.textAlign = "center";
-x.appendChild(document.createTextNode(decodeURIComponent(escape(window.atob( 'UGjDoXQgdHJp4buDbiBi4bufaSBuaHRAaHV1dGhhbmhkdGQuY29tLiBE4buvIGxp4buHdTogQuG7mSBZIHThur8sIFdvcmxkT01ldGVycw==' )))));                                           // Append the text to <p>
+x.appendChild(document.createTextNode(decodeURIComponent(escape(window.atob(lang['source'])))));
 document.body.appendChild(x); 
 
 /* Atom news */
-const url = 'https://news.google.com/atom/search?q=corona%20when%3A1h&hl=vi&gl=VN&ceid=VN:vi';
+const url = 'https://news.google.com/atom/search?q=corona%20' + lang['feed'];
 const textarea = document.getElementById('feed');
 function getFeed() {
   feednami.load(url)
@@ -250,27 +249,31 @@ function getCookie(cname) {
   return "";
 }
 
+function getJaDate(date) {
+  return date.split("/").reverse().join("/");
+}
+
 function timeago(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
   var interval = Math.floor(seconds / 31536000);
   if (interval > 1) {
-    return interval + " năm trước";
+    return interval + ' ' + lang['năm'] + lang['trước'];
   }
   interval = Math.floor(seconds / 2592000);
   if (interval > 1) {
-    return interval + " tháng trước";
+    return interval + ' ' + lang['tháng'] + lang['trước'];
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
-    return interval + " ngày trước";
+    return interval + ' ' + lang['ngày'] + lang['trước'];
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
-    return interval + " giờ trước";
+    return interval + ' ' + lang['giờ'] + lang['trước'];
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
-    return interval + " phút trước";
+    return interval + ' ' + lang['phút'] + lang['trước'];
   }
-  return "vài giây trước";
+  return lang['giây'] + lang['trước'];;
 }
