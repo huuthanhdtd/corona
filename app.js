@@ -41,9 +41,10 @@ google.charts.load('current', { packages: ['corechart', 'line'] });
 
 
 function showInfo(data) {
-  if (document.getElementById('updatetime').innerText != data[0]['gsx$cậpnhật']) {
+  var d = (lang.Code == 'vi')?data[0]['gsx$cậpnhật']:getJaDate(data[0]['gsx$cậpnhật'].substring(0,10))+data[0]['gsx$cậpnhật'].substring(10);
+  if (document.getElementById('updatetime').innerText != d) {
     dt = data;
-    document.getElementById('updatetime').innerText = dt[0]['gsx$cậpnhật'];
+    document.getElementById('updatetime').innerText = d;
     drawTable();
 
     document.getElementById('map').innerHTML = '';
@@ -64,10 +65,11 @@ function drawGraph() {
   data.addColumn('number', lang['Mới']);
   //data.addColumn({type: 'number', role: 'annotation'});
   for (i = 0; i < dt.length; i++) {
-    var nn = parseInt(dt[i]['gsx$confirmed'])
-    var tv = parseInt(dt[i]['gsx$deaths'])
-    var kb = parseInt(dt[i]['gsx$recovered'])
-    data.addRows([[dt[i]['gsx$date'], nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
+    var nn = parseInt(dt[i]['gsx$confirmed']);
+    var tv = parseInt(dt[i]['gsx$deaths']);
+    var kb = parseInt(dt[i]['gsx$recovered']);
+    var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
+    data.addRows([[d, nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
   }
 
 
@@ -162,7 +164,8 @@ async function drawTable() {
   hasComfirmed = {};
   var lastData = dt[dt.length - 1];
   for (var i = dt.length - 1; i >= 0; i--) {
-    html += '<tr><td>' + dt[i]['gsx$date'] + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$nhiễm'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$chết'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$khỏi'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
+    var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
+    html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$nhiễm'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$chết'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$khỏi'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
     //add Tỉnh thành
     if (dt[i]['gsx$tỉnhthành'] != '') {
       var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$nhiễm']) * 255 }
@@ -170,7 +173,7 @@ async function drawTable() {
     }
     //show news
     if (i > 1 && dt[i][lang['gsx$cậpnhật']] != '') {
-      news += '<li class="tl-item"><div class="timestamp">' + dt[i]['gsx$date'] + '</div><div class="item-title">' + dt[i][lang['gsx$cậpnhật']].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
+      news += '<li class="tl-item"><div class="timestamp">' + d + '</div><div class="item-title">' + dt[i][lang['gsx$cậpnhật']].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
     }
 
   }
