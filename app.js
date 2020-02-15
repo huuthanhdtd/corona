@@ -89,7 +89,7 @@ function drawGraph() {
       slantedTextAngle: 90
     },
     vAxis: {
-      title: 'Người',
+      title: lang['Người'],
       textStyle: {
         color: '#1a237e',
         fontSize: 12,
@@ -139,10 +139,10 @@ function drawGraph() {
     var col = parseInt(el.getAttribute('col'));
     view = new google.visualization.DataView(data);
     if (cols[col] == true) {
-      el.innerText = el.innerText.replace('ẨN', 'HIỆN');
+      el.innerText = el.innerText.replace(lang['Ẩn'], lang['Hiện']);
       cols[col] = false;
     } else {
-      el.innerText = el.innerText.replace('HIỆN', 'ẨN');
+      el.innerText = el.innerText.replace(lang['Hiện'], lang['Ẩn']);
       cols[col] = true;
     }
     refreshChart();
@@ -257,23 +257,23 @@ function timeago(date) {
   var seconds = Math.floor((new Date() - date) / 1000);
   var interval = Math.floor(seconds / 31536000);
   if (interval > 1) {
-    return interval + ' ' + lang['năm'] + lang['trước'];
+    return interval + lang['năm'];
   }
   interval = Math.floor(seconds / 2592000);
   if (interval > 1) {
-    return interval + ' ' + lang['tháng'] + lang['trước'];
+    return interval + lang['tháng'];
   }
   interval = Math.floor(seconds / 86400);
   if (interval > 1) {
-    return interval + ' ' + lang['ngày'] + lang['trước'];
+    return interval + lang['ngày'];
   }
   interval = Math.floor(seconds / 3600);
   if (interval > 1) {
-    return interval + ' ' + lang['giờ'] + lang['trước'];
+    return interval + lang['giờ'];
   }
   interval = Math.floor(seconds / 60);
   if (interval > 1) {
-    return interval + ' ' + lang['phút'] + lang['trước'];
+    return interval + lang['phút'];
   }
-  return lang['giây'] + lang['trước'];;
+  return lang['giây'];;
 }
