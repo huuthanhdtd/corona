@@ -15,12 +15,13 @@ let sheeturl = 'https://spreadsheets.google.com/feeds/list/1apbJy54knVUXcKpuerSr
 function getSheet() {
   fetch(sheeturl)
   .then(res => res.json())
-  .then(json => showData(json))
+  .then(json => getData(json))
+  .then(data => showInfo(data))
   .catch(err => { throw err });
 }
 
 
-function showData(json) {
+function getData(json) {
   var data = [];
   json.feed.entry.forEach(entry => {
     var row = {};
@@ -30,8 +31,9 @@ function showData(json) {
       }
       data.push(row);
     });
-
-    showInfo(data);
+    //console.log(data);
+    return data;
+    //showInfo(data);
     // console.log(data);
 }
 
@@ -171,7 +173,7 @@ async function drawTable() {
       var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$nhiễm']) * 255 }
       hasComfirmed[dt[i]['gsx$tỉnhthành']] = obj;
     }
-    //show news
+    //add news
     if (i > 1 && dt[i][lang['gsx$cậpnhật']] != '') {
       news += '<li class="tl-item"><div class="timestamp">' + d + '</div><div class="item-title">' + dt[i][lang['gsx$cậpnhật']].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
     }
@@ -200,12 +202,15 @@ function getFeed() {
     .then(feed => {
       html = '';
       var entries = feed.entries.sort(function (a, b) { return new Date(b.date) - new Date(a.date) });
-      for (var i = 0; i < 10; i++) {
+      var cnt = 0;
+      for (var i = 0; i < entries.length; i++) {
+        if (cnt > 10) break;
+        cnt++;
         var entry = entries[i];
-        if (!entry.date) {
-          i--;
+        if (!entry.date || entry.description.indexOf('<li>') >= 0) {
           continue;
         }
+        
         var day = timeago(new Date(entry.date));
         html += `<li>${entry.description} <time class="timeago" data="${entry.date}">${day}</time></li>`
       }
