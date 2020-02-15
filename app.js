@@ -22,7 +22,7 @@ function getSheet() {
 
 function showData(json) {
   var data = [];
-  
+  console.log(json);
   json.feed.entry.forEach(entry => {
     var row = {};
       for (const [key, value] of Object.entries(entry)) {
@@ -65,10 +65,10 @@ function drawGraph() {
   data.addColumn('number', 'Mới');
   //data.addColumn({type: 'number', role: 'annotation'});
   for (i = 0; i < dt.length; i++) {
-    var nn = parseInt(dt[i]['gsx$nghinhiễm'])
-    var tv = parseInt(dt[i]['gsx$tửvong'])
-    var kb = parseInt(dt[i]['gsx$khỏibệnh'])
-    data.addRows([[dt[i]['gsx$ngày'], nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$tăngnhiễm'])]]);
+    var nn = parseInt(dt[i]['gsx$confirmed'])
+    var tv = parseInt(dt[i]['gsx$deaths'])
+    var kb = parseInt(dt[i]['gsx$recovered'])
+    data.addRows([[dt[i]['gsx$date'], nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
   }
 
 
@@ -163,7 +163,7 @@ async function drawTable() {
   hasComfirmed = {};
   var lastData = dt[dt.length - 1];
   for (var i = dt.length - 1; i >= 0; i--) {
-    html += '<tr><td>' + dt[i]['gsx$ngày'] + '</td><td>' + dt[i]['gsx$nghinhiễm'] + ' (' + dt[i]['gsx$nhiễm'] + ')</td><td>' + dt[i]['gsx$tửvong'] + ' (' + dt[i]['gsx$chết'] + ')</td><td>' + dt[i]['gsx$khỏibệnh'] + ' (' + dt[i]['gsx$khỏi'] + ')</td><td>' + dt[i]['gsx$tăngnhiễm'] + '</td>' + '</tr>';
+    html += '<tr><td>' + dt[i]['gsx$date'] + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$nhiễm'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$chết'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$khỏi'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
     //add Tỉnh thành
     if (dt[i]['gsx$tỉnhthành'] != '') {
       var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$nhiễm']) * 255 }
@@ -171,15 +171,15 @@ async function drawTable() {
     }
     //show news
     if (i > 1 && dt[i]['gsx$cậpnhật'] != '') {
-      news += '<li class="tl-item"><div class="timestamp">' + dt[i]['gsx$ngày'] + '</div><div class="item-title">' + dt[i]['gsx$cậpnhật'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
+      news += '<li class="tl-item"><div class="timestamp">' + dt[i]['gsx$date'] + '</div><div class="item-title">' + dt[i]['gsx$cậpnhật'].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
     }
 
   }
   document.getElementById('world').innerHTML = html;
   document.getElementById('timeline').innerHTML = news;
   //Active cases
-  var activecases = lastData['gsx$nghinhiễm'] - lastData['gsx$tửvong'] - lastData['gsx$khỏibệnh'];
-  document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> người</small></h3></div><div class="row"><div class="one-half column">Nhẹ<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['gsx$nghiêmtrọng']) + '</h4></div> <div class="one-half column">Nghiêm trọng<h4 style="color:#ea4335;margin-top:0">' + lastData['gsx$nghiêmtrọng'] + '</h4></div></div>';
+  var activecases = lastData['gsx$confirmed'] - lastData['gsx$deaths'] - lastData['gsx$recovered'];
+  document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> người</small></h3></div><div class="row"><div class="one-half column">Nhẹ<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['gsx$critical']) + '</h4></div> <div class="one-half column">Nghiêm trọng<h4 style="color:#ea4335;margin-top:0">' + lastData['gsx$critical'] + '</h4></div></div>';
   //Vietnam
   document.getElementById('vn-stats').innerHTML = '<div class="one-third column">Nhiễm<h4>' + lastData['gsx$nhiễm'] + '</h4></div><div class="one-third column vn-tv">Tử vong<h4>' + lastData['gsx$chết'] + '</h4></div> <div class="one-third column vn-bp">Bình phục<h4>' + lastData['gsx$khỏi'] + '</h4></div>'
 }
