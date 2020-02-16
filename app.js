@@ -175,7 +175,7 @@ async function drawTable() {
     }
     //add news
     if (i > 1 && dt[i][lang['gsx$cậpnhật']] != '') {
-      news += '<li class="tl-item"><div class="timestamp">' + d + '</div><div class="item-title">' + dt[i][lang['gsx$cậpnhật']].replace(/\[(.*)\]\((https?:\/\/.*)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
+      news += '<li class="tl-item"><div class="timestamp">' + d + '</div><div class="item-title">' + dt[i][lang['gsx$cậpnhật']].replace(/\[(.*)\]\((https?:\/\/(?:(?!\().)*?)\)/g, '<a href="$2" target="_blank">$1</a>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>').replace(/\*(.*?)\*/g, '<em>$1</em>').replace(/\~(.*?)\~/g, '<span style="font-weight:bold;color:#ea4335;">$1</span>').replace(/\n/g, '<br>') + '</div></li>';
     }
 
   }
