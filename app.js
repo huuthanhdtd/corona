@@ -181,6 +181,7 @@ async function drawTable() {
   }
   document.getElementById('world').innerHTML = html;
   document.getElementById('timeline').innerHTML = news;
+  document.getElementById('countries').innerText = dt[1]['gsx$cậpnhật'];
   //Active cases
   var activecases = lastData['gsx$confirmed'] - lastData['gsx$deaths'] - lastData['gsx$recovered'];
   document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> '+lang['người']+'</small></h3></div><div class="row"><div class="one-half column">'+lang['Nhẹ']+'<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['gsx$critical']) + '</h4></div> <div class="one-half column">'+lang['Nghiêm trọng']+'<h4 style="color:#ea4335;margin-top:0">' + lastData['gsx$critical'] + '</h4></div></div>';
