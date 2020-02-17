@@ -300,7 +300,7 @@ async function setMap(){
             this.node.style.opacity = 0.7;
             var obj = hasComfirmed[this.data('region')];
             if (obj)
-                label.innerHTML = '<strong>'+this.data('region') + `</strong><br>Nhiễm: ${obj.n}<br> Tử vong: ${obj.c}<br>Khỏi: ${obj.k}`;
+                label.innerHTML = '<strong>'+this.data('region') + `</strong><br>${lang['Nhiễm']}: ${obj.n}<br> ${lang['Tử vong']}: ${obj.c}<br>${lang['Khỏi']}: ${obj.k}`;
             else
                 label.innerHTML = this.data('region');
                 
