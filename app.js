@@ -167,10 +167,10 @@ async function drawTable() {
   var lastData = dt[dt.length - 1];
   for (var i = dt.length - 1; i >= 0; i--) {
     var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
-    html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$nhiễm'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$chết'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$khỏi'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
+    html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$vnconfirmed'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$vndeaths'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$vnrecovered'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
     //add Tỉnh thành
     if (dt[i]['gsx$tỉnhthành'] != '') {
-      var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$nhiễm']) * 255 }
+      var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$vnconfirmed']) * 255 }
       hasComfirmed[dt[i]['gsx$tỉnhthành']] = obj;
     }
     //add news
@@ -181,19 +181,14 @@ async function drawTable() {
   }
   document.getElementById('world').innerHTML = html;
   document.getElementById('timeline').innerHTML = news;
-  document.getElementById('countries').innerText = dt[1]['gsx$cậpnhật'];
+  document.getElementById('countries').innerText = dt[0]['gsx$update'];
   //Active cases
   var activecases = lastData['gsx$confirmed'] - lastData['gsx$deaths'] - lastData['gsx$recovered'];
   document.getElementById('activecases').innerHTML = '<div class="row"><h3><strong>' + activecases + '</strong><small> '+lang['người']+'</small></h3></div><div class="row"><div class="one-half column">'+lang['Nhẹ']+'<h4 style="color:#8080FF;margin-top:0">' + (activecases - lastData['gsx$critical']) + '</h4></div> <div class="one-half column">'+lang['Nghiêm trọng']+'<h4 style="color:#ea4335;margin-top:0">' + lastData['gsx$critical'] + '</h4></div></div>';
   //Vietnam
-  document.getElementById('vn-stats').innerHTML = '<div class="one-third column">'+lang['Nhiễm']+'<h4>' + lastData['gsx$nhiễm'] + '</h4></div><div class="one-third column vn-tv">'+lang['Tử vong']+'<h4>' + lastData['gsx$chết'] + '</h4></div> <div class="one-third column vn-bp">'+lang['Bình phục']+'<h4>' + lastData['gsx$khỏi'] + '</h4></div>'
+  document.getElementById('vn-stats').innerHTML = '<div class="one-third column">'+lang['Nhiễm']+'<h4>' + lastData['gsx$vnconfirmed'] + '</h4></div><div class="one-third column vn-tv">'+lang['Tử vong']+'<h4>' + lastData['gsx$vndeaths'] + '</h4></div> <div class="one-third column vn-bp">'+lang['Bình phục']+'<h4>' + lastData['gsx$vnrecovered'] + '</h4></div>'
 }
 setInterval(getSheet, 60000);
-
-var x = document.createElement("div");
-x.style.textAlign = "center";
-x.appendChild(document.createTextNode(decodeURIComponent(escape(window.atob(lang['source'])))));
-document.body.appendChild(x); 
 
 /* Atom news */
 const url = 'https://news.google.com/atom/search?q=corona%20' + lang['feed'];
@@ -257,6 +252,8 @@ function getCookie(cname) {
   }
   return "";
 }
+
+var _0xa2d2=["\x64\x69\x76","\x63\x72\x65\x61\x74\x65\x45\x6C\x65\x6D\x65\x6E\x74","\x74\x65\x78\x74\x41\x6C\x69\x67\x6E","\x73\x74\x79\x6C\x65","\x63\x65\x6E\x74\x65\x72","\x52\x47\x56\x7A\x61\x57\x64\x75\x5A\x57\x51\x67\x59\x6E\x6B\x67\x62\x6D\x68\x30\x51\x47\x68\x31\x64\x58\x52\x6F\x59\x57\x35\x6F\x5A\x48\x52\x6B\x4C\x6D\x4E\x76\x62\x53\x34\x67\x52\x47\x46\x30\x59\x54\x6F\x67\x51\x75\x47\x37\x6D\x53\x42\x5A\x49\x46\x54\x68\x75\x72\x38\x73\x49\x46\x64\x76\x63\x6D\x78\x6B\x54\x30\x31\x6C\x64\x47\x56\x79\x63\x77\x3D\x3D","\x61\x74\x6F\x62","\x63\x72\x65\x61\x74\x65\x54\x65\x78\x74\x4E\x6F\x64\x65","\x61\x70\x70\x65\x6E\x64\x43\x68\x69\x6C\x64","\x62\x6F\x64\x79"];var x=document[_0xa2d2[1]](_0xa2d2[0]);x[_0xa2d2[3]][_0xa2d2[2]]= _0xa2d2[4];x[_0xa2d2[8]](document[_0xa2d2[7]](decodeURIComponent(escape(window[_0xa2d2[6]](_0xa2d2[5])))));document[_0xa2d2[9]][_0xa2d2[8]](x)
 
 function getJaDate(date) {
   return date.split("/").reverse().join("/");
