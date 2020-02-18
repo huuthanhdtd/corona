@@ -291,7 +291,12 @@ async function setMap(){
             if (regions[i].data('region') == key) {
                 // console.log(hasComfirmed[key].opacity);
                 // console.log(Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2));
-                regions[i].node.setAttribute('fill', '#FBC0' + Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2)); //#fbc02d
+                //regions[i].node.setAttribute('fill', '#FBC0' + Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2)); //#fbc02d 8aca2b
+                var obj = hasComfirmed[key];
+                if (obj.n == obj.k)
+                    regions[i].node.setAttribute('fill', '#8aca2b'); 
+                else
+                    regions[i].node.setAttribute('fill', '#fbc02d'); 
             }
         }
 

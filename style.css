@@ -492,9 +492,8 @@ span.circle{
   height:12px;
   margin:0px 5px 0 5px;
 }
-span.circle.congbodich{
+span.circle.noicodich{
   background-color:#FBC02D;
-  
 }
 span.circle.noidieutri{
   color:#E2574C;
@@ -502,6 +501,9 @@ span.circle.noidieutri{
   font-weight:bolder;
   font-family:Arial;
   line-height:10px;
+}
+span.circle.khoihoantoan {
+  background-color: #8aca2b;
 }
 
 /* Active Cases */

@@ -41,6 +41,25 @@ var hasComfirmed = {};
 document.addEventListener('DOMContentLoaded', getSheet());
 google.charts.load('current', { packages: ['corechart', 'line'] });
 
+// google.charts.load('current', { packages: ['corechart', 'line', 'geochart'], 'mapsApiKey': 'AIzaSyD-9tSrke72PouQMnMX-a7eZSW0jkFMBWY', 'language':'vi' });
+// google.charts.setOnLoadCallback(drawRegionsMap);
+// function drawRegionsMap() {
+//   var data = google.visualization.arrayToDataTable([
+//     ['Country', 'Popularity'],
+//     ['Germany', 200],
+//     ['United States', 300],
+//     ['Brazil', 400],
+//     ['Canada', 500],
+//     ['France', 600],
+//     ['RU', 700]
+//   ]);
+
+//   var options = {};
+
+//   var chart = new google.visualization.GeoChart(document.getElementById('geochart'));
+
+//   chart.draw(data, options);
+// }
 
 function showInfo(data) {
   var d = (lang.Code == 'vi')?data[0]['gsx$cậpnhật']:getJaDate(data[0]['gsx$cậpnhật'].substring(0,10))+data[0]['gsx$cậpnhật'].substring(10);
@@ -120,7 +139,7 @@ function drawGraph() {
       2: { pointSize: 4, pointShape: 'circle' },
       3: { lineDashStyle: [1, 1] }
     },
-
+    focusTarget: 'category'
   };
   var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
   google.visualization.events.addListener(chart, 'ready', function () {
