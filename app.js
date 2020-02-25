@@ -90,7 +90,8 @@ function drawGraph() {
     var tv = parseInt(dt[i]['gsx$deaths']);
     var kb = parseInt(dt[i]['gsx$recovered']);
     var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
-    data.addRows([[d, nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
+    if (d != '')
+      data.addRows([[d, nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
   }
 
 
@@ -184,13 +185,16 @@ async function drawTable() {
   var htmlCountries = '';
   var news = '';
   hasComfirmed = {};
-  var lastData = dt[dt.length - 1];
+  var lastData; //= dt[dt.length - 1];
   var ri = 0;
   for (var i = dt.length - 1; i >= 0; i--) {
     var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
     //add by date
-    if (d != '')
-     html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$vnconfirmed'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$vndeaths'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$vnrecovered'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
+    if (d != ''){
+      if (!lastData) lastData = dt[i];
+      html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$vnconfirmed'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$vndeaths'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$vnrecovered'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
+    }
+     
     //countries
     htmlCountries += '<tr><td>' + dt[ri]['gsx$country'] + '</td><td>' + dt[ri]['gsx$totalcases'] + '</td><td>';
     //if (dt[ri]['gsx$totalnewcases'] != '') htmlCountries +=  '+';
