@@ -29,7 +29,7 @@
   <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,900,400italic' rel='stylesheet' type='text/css'>
   <link rel="shortcut icon" href="../favicon.png">
 
-  <link rel='stylesheet' type='text/css' href='../style.min.css?v=1.1'>
+  <link rel='stylesheet' type='text/css' href='../style.min.css?v=1.5'>
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-12788638-4"></script>
   <script>
@@ -47,15 +47,29 @@
     <h1 id="logo"><a href="/">Virus COVID-19 (Corona 2019-nCoV)</a></h1>
     <div style="float: right;"><a href="https://covid19.ga/" title="Tiếng Việt">Tiếng Việt</a></div>
     <p><em><span id="updatetime">2019/2/10 18:00</span>版, 5分ごとで自動的に更新します.</em></p>
-    <p>コロナウイルスCOVID-19は、世界中の<strong id="countries">-</strong>の国と地域に影響を及ぼしています。</p>
     <div id="chart_div"></div>
     <div class="row">
       <div class="four columns"><button class="toggle" col="2">感染数非表示</button> <button class="toggle" col="4">死亡数非表示</button></div>
       <div class="eight columns" style="text-align: right;"><a class="" href="javascript:fbShare();">Facebook</a>へシェア, または <a id="imageChart" download="ncov.png"
         href="#">画像として保存</a></div>
     </div>
-    <div>
-      
+    <div class="row">
+      <h5>国と地域</h5>
+      <p>コロナウイルスCOVID-19は、世界中の<strong id="countries">-</strong>の国と地域、及び<strong>1</strong>クルーズ船に影響を及ぼしています。</p>
+      <table class="u-full-width totalcountries">
+        <thead>
+          <tr>
+            <th>名前</th>
+            <th>感染</th>
+            <th>新感染</th>
+            <th>死亡</th>
+            <th>新死亡</th>
+            <th>退院</th>
+            <th>重病</th>
+          </tr>
+        </thead>
+        <tbody id="totalcountries"></tbody>
+      </table>
     </div>
     <div id="fullTable" class="row">
       <div class="eight columns">
@@ -176,7 +190,7 @@
   <script src="../map.min.js?v=1.3"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="../feednami.js"></script>
-  <script src="../app.min.js?v=1.3"></script>
+  <script src="../app.min.js?v=1.5"></script>
 
 </body>
 
