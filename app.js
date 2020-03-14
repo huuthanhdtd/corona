@@ -131,7 +131,7 @@ function drawGraph() {
     annotations: {
       0: { style: 'point' }
     },
-    chartArea: { left: 40, top: 10, width: '100%', height: '85%' },
+    chartArea: { left: 50, top: 10, width: '100%', height: '85%' },
     colors: ['#4285f4', '#ea4335', '#38761d', '#4374e0'],
     legend: { position: 'bottom' },
     series: {
