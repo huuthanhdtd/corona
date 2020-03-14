@@ -361,13 +361,36 @@ tbody tr:first-child td:nth-child(2){
 tbody tr:first-child td:nth-child(3){
     color:#ea4335;
 }
-tbody tr:first-child td:nth-child(4){
+tbody#world tr:first-child td:nth-child(4){
     color:#8aca2b;
 }
-tbody tr td:last-child:before{
+tbody#world tr td:last-child:before{
   content:'+';
 }
-
+table.totalcountries{
+  border-collapse: collapse;
+}
+table.totalcountries th, table.totalcountries td{
+  border-collapse: collapse;
+  border:1px solid #ddd;
+  padding: 2px 0px 2px 2px;
+}
+tbody#totalcountries tr td:nth-child(3){
+  background-color:#FFEEAA;
+}
+tbody#totalcountries tr td:nth-child(5){
+  background-color:#ea4335;
+  color: white;;
+}
+tbody#totalcountries tr td:nth-child(3):before, tbody#totalcountries tr td:nth-child(5):before{
+  content:'+';
+}
+tbody#totalcountries tr td:empty:before{
+  content:'';
+}
+tbody#totalcountries tr td:empty{
+  background-color:transparent;
+}
 /* Spacing
 ?????????????????????????????????????????????????? */
 button,

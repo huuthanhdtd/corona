@@ -90,7 +90,8 @@ function drawGraph() {
     var tv = parseInt(dt[i]['gsx$deaths']);
     var kb = parseInt(dt[i]['gsx$recovered']);
     var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
-    data.addRows([[d, nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
+    if (d != '')
+      data.addRows([[d, nn, nn, tv, tv, kb, parseInt(dt[i]['gsx$newcases'])]]);
   }
 
 
@@ -181,12 +182,27 @@ function drawGraph() {
 
 async function drawTable() {
   var html = '';
+  var htmlCountries = '';
   var news = '';
   hasComfirmed = {};
-  var lastData = dt[dt.length - 1];
+  var lastData; //= dt[dt.length - 1];
+  var ri = 0;
   for (var i = dt.length - 1; i >= 0; i--) {
     var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
-    html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$vnconfirmed'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$vndeaths'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$vnrecovered'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
+    //add by date
+    if (d != ''){
+      if (!lastData) lastData = dt[i];
+      html += '<tr><td>' + d + '</td><td>' + dt[i]['gsx$confirmed'] + ' (' + dt[i]['gsx$vnconfirmed'] + ')</td><td>' + dt[i]['gsx$deaths'] + ' (' + dt[i]['gsx$vndeaths'] + ')</td><td>' + dt[i]['gsx$recovered'] + ' (' + dt[i]['gsx$vnrecovered'] + ')</td><td>' + dt[i]['gsx$newcases'] + '</td>' + '</tr>';
+    }
+     
+    //countries
+    htmlCountries += '<tr><td>' + dt[ri]['gsx$country'] + '</td><td>' + dt[ri]['gsx$totalcases'] + '</td><td>';
+    //if (dt[ri]['gsx$totalnewcases'] != '') htmlCountries +=  '+';
+    htmlCountries +=  dt[ri]['gsx$totalnewcases'] + '</td><td>'  + dt[ri]['gsx$totaldeaths'] + '</td><td>';
+    //if (dt[ri]['gsx$totalnewdeaths'] != '') htmlCountries +=  '+';
+    htmlCountries +=  dt[ri]['gsx$totalnewdeaths'] + '</td><td>' + dt[ri]['gsx$totalrecovered'] + '</td><td>' + dt[ri]['gsx$totalcritical'] + '</td>' + '</tr>';
+    ri++;
+
     //add Tỉnh thành
     if (dt[i]['gsx$tỉnhthành'] != '') {
       var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$vnconfirmed']) * 255 }
@@ -199,6 +215,7 @@ async function drawTable() {
 
   }
   document.getElementById('world').innerHTML = html;
+  document.getElementById('totalcountries').innerHTML = htmlCountries;
   document.getElementById('timeline').innerHTML = news;
   document.getElementById('countries').innerText = dt[0]['gsx$update'];
   //Active cases
