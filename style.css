@@ -352,21 +352,33 @@ th:last-child,
 td:last-child {
   padding-right: 0; }
 
-tbody tr:first-child{
-    font-weight:bold;
+tbody#world tr:first-child {
+  font-weight: 700
 }
-tbody tr:first-child td:nth-child(2){
-    color:#8080FF;
+
+tbody#world tr:first-child td:nth-child(2) {
+  color: #8080ff
 }
-tbody tr:first-child td:nth-child(3){
-    color:#ea4335;
+
+tbody#world tr:first-child td:nth-child(3) {
+  color: #ea4335
 }
-tbody#world tr:first-child td:nth-child(4){
-    color:#8aca2b;
+
+tbody#world tr:first-child td:nth-child(4) {
+  color: #8aca2b
 }
-tbody#world tr td:last-child:before{
-  content:'+';
+
+tbody#world tr td:last-child:before {
+  content: '+'
 }
+
+table.totalprovinces td:first-child{
+  white-space:nowrap;
+}
+table.totalprovinces th, tbody#totalprovinces td{
+  padding:0;
+}
+
 table.totalcountries{
   border-collapse: collapse;
 }

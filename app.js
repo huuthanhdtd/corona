@@ -183,6 +183,7 @@ function drawGraph() {
 async function drawTable() {
   var html = '';
   var htmlCountries = '';
+  var htmlProvinces = '';
   var news = '';
   hasComfirmed = {};
   var lastData; //= dt[dt.length - 1];
@@ -207,6 +208,7 @@ async function drawTable() {
     if (dt[i]['gsx$tỉnhthành'] != '') {
       var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$vnconfirmed']) * 255 }
       hasComfirmed[dt[i]['gsx$tỉnhthành']] = obj;
+      htmlProvinces = '<tr><td>' + dt[i]['gsx$tỉnhthành'] + '</td><td>' + dt[i]['gsx$canhiễm'] + '</td><td>' + dt[i]['gsx$cachết'] + '</td><td>' + dt[i]['gsx$cakhỏi'] +'</td><td>' + '</tr>' + htmlProvinces
     }
     //add news
     if (i > 1 && dt[i][lang['gsx$cậpnhật']] != '') {
@@ -216,6 +218,7 @@ async function drawTable() {
   }
   document.getElementById('world').innerHTML = html;
   document.getElementById('totalcountries').innerHTML = htmlCountries;
+  document.getElementById('totalprovinces').innerHTML = htmlProvinces;
   document.getElementById('timeline').innerHTML = news;
   document.getElementById('countries').innerText = dt[0]['gsx$update'];
   //Active cases
