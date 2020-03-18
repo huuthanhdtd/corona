@@ -375,8 +375,9 @@ tbody#world tr td:last-child:before {
 table.totalprovinces td:first-child{
   white-space:nowrap;
 }
-table.totalprovinces th, tbody#totalprovinces td{
-  padding:0;
+table.totalprovinces th, tbody#totalprovinces td,
+table.hien-tai th, table.hien-tai td{
+  padding:0 5px;
 }
 
 table.totalcountries{
@@ -499,7 +500,7 @@ there.
 @media (min-width: 550px) {}
 
 /* Larger than tablet */
-@media (min-width: 750px) {}
+@media (min-width: 750px) {.float-right{float:right;}}
 
 /* Larger than desktop */
 @media (min-width: 1000px) {}

@@ -54,40 +54,10 @@
         href="#">画像として保存</a></div>
     </div>
     <div class="row">
-      <h5>国と地域</h5>
-      <p>コロナウイルスCOVID-19は、世界中の<strong id="countries">-</strong>の国と地域、及び<strong>1</strong>クルーズ船に影響を及ぼしています。</p>
-      <table class="u-full-width totalcountries">
-        <thead>
-          <tr>
-            <th>名前</th>
-            <th>感染</th>
-            <th>新感染</th>
-            <th>死亡</th>
-            <th>新死亡</th>
-            <th>退院</th>
-            <th>重病</th>
-          </tr>
-        </thead>
-        <tbody id="totalcountries"></tbody>
-      </table>
+      
     </div>
     <div id="fullTable" class="row">
-      <div class="eight columns">
-        <h5>現在の状況</h5>
-        <table class="u-full-width">
-          <thead>
-            <tr>
-              <th>月日</th>
-              <th>感染 (VN)</th>
-              <th>死亡 (VN)</th>
-              <th>復帰 (VN)</th>
-              <th>新感染</th>
-            </tr>
-          </thead>
-          <tbody id="world"></tbody>
-        </table>
-      </div>
-      <div class="four columns">
+      <div class="five columns">
         <div class="row">
           <h5>アクティブケース</h5>
           <div id="activecases"></div>
@@ -117,19 +87,51 @@
             <span class="circle khoihoantoan">&nbsp;</span>すべて復帰場所
           </div>
         </div>
-
+        <div>
+          <h5>ニュース</h5>
+          <ul id="feed"></ul>
+        </div>
+        <h5>現在の状況</h5>
+        <table class="u-full-width">
+          <thead>
+            <tr>
+              <th>月日</th>
+              <th>感染 (VN)</th>
+              <th>死亡 (VN)</th>
+              <th>復帰 (VN)</th>
+              <th>新感染</th>
+            </tr>
+          </thead>
+          <tbody id="world"></tbody>
+        </table>
       </div>
+      <div class="seven columns">
+        <h5>国と地域</h5>
+        <p>コロナウイルスCOVID-19は、世界中の<strong id="countries">-</strong>の国と地域、及び<strong>1</strong>クルーズ船に影響を及ぼしています。</p>
+        <table class="u-full-width totalcountries">
+          <thead>
+            <tr>
+              <th>名前</th>
+              <th>感染</th>
+              <th>新感染</th>
+              <th>死亡</th>
+              <th>新死亡</th>
+              <th>退院</th>
+              <th>重病</th>
+            </tr>
+          </thead>
+          <tbody id="totalcountries"></tbody>
+        </table>
+      </div>
+      
     </div>
 
-    <div class="history-tl-container">
+    <div class="history-tl-container" style="display:none;">
       <h5>タイムライン</h5>
       <ul class="tl" id="timeline"><div class="loading"></div>
       </ul>
     </div>
-    <div>
-      <h5>ニュース</h5>
-      <ul id="feed"></ul>
-    </div>
+    
     <hr>
     <footer>
       <div class="footer">
