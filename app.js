@@ -188,6 +188,7 @@ async function drawTable() {
   hasComfirmed = {};
   var lastData; //= dt[dt.length - 1];
   var ri = 0;
+  var numprovinces = 0;
   for (var i = dt.length - 1; i >= 0; i--) {
     var d = (lang.Code == 'vi')?dt[i]['gsx$date']:getJaDate(dt[i]['gsx$date']);
     //add by date
@@ -209,6 +210,7 @@ async function drawTable() {
       var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$vnconfirmed']) * 255 }
       hasComfirmed[dt[i]['gsx$tỉnhthành']] = obj;
       htmlProvinces = '<tr><td>' + dt[i]['gsx$tỉnhthành'] + '</td><td>' + dt[i]['gsx$canhiễm'] + '</td><td>' + dt[i]['gsx$cachết'] + '</td><td>' + dt[i]['gsx$cakhỏi'] +'</td><td>' + '</tr>' + htmlProvinces
+      numprovinces++;
     }
     //add news
     if (i > 1 && dt[i][lang['gsx$cậpnhật']] != '') {
@@ -219,6 +221,7 @@ async function drawTable() {
   document.getElementById('world').innerHTML = html;
   document.getElementById('totalcountries').innerHTML = htmlCountries;
   document.getElementById('totalprovinces').innerHTML = htmlProvinces;
+  document.getElementById('numprovinces').innerHTML = numprovinces;
   document.getElementById('timeline').innerHTML = news;
   document.getElementById('countries').innerText = dt[0]['gsx$update'];
   //Active cases

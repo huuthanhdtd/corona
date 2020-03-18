@@ -59,22 +59,26 @@
     </div>
     
     <div id="fullTable" class="row">
-      <div class="eight columns">
-        <h5>Hiện tại</h5>
-        <table class="u-full-width">
+      <div class="seven columns">
+        <h5>Quốc Gia</h5>
+        <p>Virus COVID-19 đang ảnh hưởng đến <strong id="countries">-</strong> quốc gia/vùng lãnh thổ và <strong>1</strong> thuyền du lịch trên thế giới.</p>
+        <table class="u-full-width totalcountries">
           <thead>
             <tr>
-              <th>Ngày</th>
-              <th>Nhiễm (VN)</th>
-              <th>Tử vong (VN)</th>
-              <th>Bình phục (VN)</th>
+              <th>Tên</th>
+              <th>Tổng nhiễm</th>
               <th>Nhiễm mới</th>
+              <th>Tử vong</th>
+              <th>Chết mới</th>
+              <th>Bình phục</th>
+              <th>Nguy kịch</th>
             </tr>
           </thead>
-          <tbody id="world"></tbody>
+          <tbody id="totalcountries"></tbody>
         </table>
+        
       </div>
-      <div class="four columns">
+      <div class="five columns">
         <div class="row">
           <h5>Đang điều trị</h5>
           <div id="activecases"></div>
@@ -83,6 +87,7 @@
           <h5>Việt Nam</h5>
           <div id="vn-stats">
           </div>
+          <p>Hiện có <strong id="numprovinces">-</strong> tỉnh/thành phố có người nhiễm Covid-19</p>
           <table class="u-full-width totalprovinces">
             <thead>
               <tr>
@@ -104,38 +109,36 @@
             <span class="circle khoihoantoan">&nbsp;</span>Nơi bình phục hết
           </div>
         </div>
-
+        <div>
+          <h5>Tin tức</h5>
+          <ul id="feed"></ul>
+        </div>
+        <div class="row">
+          <h5>Dữ liệu theo ngày</h5>
+            <table class="u-full-width">
+              <thead>
+                <tr>
+                  <th>Ngày</th>
+                  <th>Nhiễm (VN)</th>
+                  <th>Tử vong (VN)</th>
+                  <th>Bình phục (VN)</th>
+                  <th>Nhiễm mới</th>
+                </tr>
+              </thead>
+              <tbody id="world"></tbody>
+            </table>
+        </div>
       </div>
     </div>
 
-    <div class="row">
-      <h5>Quốc Gia</h5>
-      <p>Virus COVID-19 đang ảnh hưởng đến <strong id="countries">-</strong> quốc gia/vùng lãnh thổ và <strong>1</strong> thuyền du lịch trên thế giới.</p>
-      <table class="u-full-width totalcountries">
-        <thead>
-          <tr>
-            <th>Tên</th>
-            <th>Tổng nhiễm</th>
-            <th>Nhiễm mới</th>
-            <th>Tử vong</th>
-            <th>Chết mới</th>
-            <th>Bình phục</th>
-            <th>Nguy kịch</th>
-          </tr>
-        </thead>
-        <tbody id="totalcountries"></tbody>
-      </table>
-    </div>
+    
 
-    <div class="history-tl-container">
+    <div class="history-tl-container" style="display:none;">
       <h5>Tổng hợp</h5>
       <ul class="tl" id="timeline"><div class="loading"></div>
       </ul>
     </div>
-    <div>
-      <h5>Tin tức</h5>
-      <ul id="feed"></ul>
-    </div>
+    
     <hr>
     <footer>
       <div class="footer">
@@ -208,7 +211,7 @@
   <script src="map.min.js?v=1.3"></script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="feednami.js"></script>
-  <script src="app.min.js?v=1.6"></script>
+  <script src="app.min.js?v=1.7"></script>
 
 </body>
 
