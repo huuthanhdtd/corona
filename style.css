@@ -621,3 +621,7 @@ ul.tl li .timestamp{
     transform: rotate(360deg);
   }
 }
+
+h1>a>small{
+  font-weight: 200;font-size: 0.75em;
+}

@@ -289,14 +289,23 @@ async function setMap(){
         // Change if hasConfirmed fill colour to gold
         for (var key in hasComfirmed){
             if (regions[i].data('region') == key) {
-                // console.log(hasComfirmed[key].opacity);
+                console.log(Math.round(hasComfirmed[key].opacity*255).toString(16).padStart(2, '0').substring(0,2));
                 // console.log(Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2));
-                //regions[i].node.setAttribute('fill', '#FBC0' + Math.round(hasComfirmed[key].opacity).toString(16).padStart(2, '0').substring(0,2)); //#fbc02d 8aca2b
+                // regions[i].node.setAttribute('fill', '#ff' + Math.round(255-hasComfirmed[key].opacity*255).toString(16).padStart(2, '0').substring(0,2) + '00'); //#fbc02d 8aca2b
                 var obj = hasComfirmed[key];
                 if (obj.n == obj.k)
-                    regions[i].node.setAttribute('fill', '#8aca2b'); 
-                else
-                    regions[i].node.setAttribute('fill', '#fbc02d'); 
+                {
+                regions[i].node.setAttribute('fill', '#8aca2b'); 
+                }     
+                else{
+                    regions[i].node.setAttribute('fill', '#ff' + Math.round(255-hasComfirmed[key].opacity*255).toString(16).padStart(2, '0').substring(0,2) + '00'); 
+                    // regions[i].node.setAttribute('fill', '#fbc02d');
+                    // if (hasComfirmed[key].opacity < 0.35)
+                    // regions[i].node.setAttribute('fill-opacity', 0.35);
+                    // else 
+                    // regions[i].node.setAttribute('fill-opacity', hasComfirmed[key].opacity); 
+                }
+                    
             }
         }
 

@@ -207,7 +207,8 @@ async function drawTable() {
 
     //add Tỉnh thành
     if (dt[i]['gsx$tỉnhthành'] != '') {
-      var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(lastData['gsx$vnconfirmed']) * 255 }
+      console.log(parseInt(dt[i]['gsx$canhiễm']) * 255 / parseInt(dt[0]['gsx$canhiễm']));
+      var obj = { n: dt[i]['gsx$canhiễm'], c: dt[i]['gsx$cachết'], k: dt[i]['gsx$cakhỏi'], opacity: parseInt(dt[i]['gsx$canhiễm']) / parseInt(dt[0]['gsx$canhiễm'])}
       hasComfirmed[dt[i]['gsx$tỉnhthành']] = obj;
       htmlProvinces = '<tr><td>' + dt[i]['gsx$tỉnhthành'] + '</td><td>' + dt[i]['gsx$canhiễm'] + '</td><td>' + dt[i]['gsx$cachết'] + '</td><td>' + dt[i]['gsx$cakhỏi'] +'</td><td>' + '</tr>' + htmlProvinces
       numprovinces++;
